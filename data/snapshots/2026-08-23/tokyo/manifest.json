@@ -34,7 +34,7 @@
     "aviation:fbjp12",
     "aviation:sigmet"
   ],
-  "generated_at": "2026-08-23T00:29:25+09:00",
+  "generated_at": "2026-08-23T07:29:44+09:00",
   "sources": [
     {
       "id": "amedas",
@@ -50,10 +50,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "7c905664b0002a345cefb2a62c2927620ae6bfac00188dc9f4333f87eb113a7a",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "weather-map",
@@ -64,7 +64,7 @@
       "local_path": null,
       "data_path": null,
       "mime_type": null,
-      "fetched_at": "2026-08-23T00:29:28+09:00",
+      "fetched_at": "2026-08-23T07:29:44+09:00",
       "issued_at": null,
       "valid_from": null,
       "valid_to": null,
@@ -86,7 +86,7 @@
       "local_path": null,
       "data_path": null,
       "mime_type": null,
-      "fetched_at": "2026-08-23T00:29:28+09:00",
+      "fetched_at": "2026-08-23T07:29:45+09:00",
       "issued_at": null,
       "valid_from": null,
       "valid_to": null,
@@ -108,7 +108,7 @@
       "local_path": null,
       "data_path": null,
       "mime_type": null,
-      "fetched_at": "2026-08-23T00:29:28+09:00",
+      "fetched_at": "2026-08-23T07:29:45+09:00",
       "issued_at": null,
       "valid_from": null,
       "valid_to": null,
@@ -130,7 +130,7 @@
       "local_path": null,
       "data_path": null,
       "mime_type": null,
-      "fetched_at": "2026-08-23T00:29:28+09:00",
+      "fetched_at": "2026-08-23T07:29:45+09:00",
       "issued_at": null,
       "valid_from": null,
       "valid_to": null,
@@ -157,10 +157,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "c1a9533ab2c76be4327effd572c2177fbd9c630ffb5feff52e3088b76da1881f",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "upper-500",
@@ -176,10 +176,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "9ce4e6feee8eb391b27d906c721277f223704f4386cac2d392d99367c9226285",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "numeric",
@@ -195,8 +195,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "cd7b5392563221d378b91ab163f912d8f3fed77468622a9600e94098dc7501e9",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": false
     },
@@ -214,10 +214,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "47d1d86b4a05f7f55ea16676504b218b080ca49ae9474e8fcfb57fa6c8f58391",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "numeric-2week",
@@ -233,10 +233,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "13bb955ba4f979b8afd20bd106d68d25fc1b48865bb7f3a40725a224a881a0fa",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "numeric-month",
@@ -252,8 +252,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "af0cd5141366a47c862b2442c0ad9914531736c7d99d190938f9ec2660c5c9df",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": false
     },
@@ -271,10 +271,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "e2ac72e9a9faff667b6ac6f179f9407eaea4e665595f3187d200c3a66f1fe0ad",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "briefing-short",
@@ -290,8 +290,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "63294ce34ad0cc6bb234760705d48f381a27ea75f610bc70e2bf2620ab00d85c",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": false
     },
@@ -309,8 +309,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "b707a4190f0c8b8567520298c53c32e91f34857d9b13025a12ae92359d1f9cb8",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": false
     },
@@ -328,10 +328,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "083d2262636b8e8132d03826981c1f4957b6a5ef8538757cbad20c8cf6b19a25",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "aviation:fbjp",
@@ -347,8 +347,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "47265535b21a914119148fa175f14b43fa5648218e370855eb6cefc8d54ddd54",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": false
     },
@@ -366,8 +366,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "2b5bc154019ac41cc4b77dc8c6fe89121bd075263b76612f0b9274171a20268b",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": false
     },
@@ -385,8 +385,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "56580bebd3c2e99c0b1bf776bfb4122f2e52f07e86bdbc2bf1efc5bd04884f2b",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": false
     },
@@ -404,8 +404,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "d12fa556d47e99072fb69832ba222c67ae7215c16348c15aaf01171a32e0c45c",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": false
     },
@@ -423,8 +423,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "be8850a4a81adb8f411ef6b37f5dce04b51f8bd4b8fc5657f963fb900d7ce41d",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": false
     },
@@ -442,19 +442,17 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "5eaa1fcceb1b5eac58ca9d38fb38742c6c6f99699429952e6f7785361adcdfda",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": false
     }
   ],
   "llm": {
-    "status": "failed",
-    "model": "gemini-2.5-flash",
-    "text_only_fallback": true,
-    "error": {
-      "type": "RuntimeError",
-      "message": "Gemini HTTP 404: This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements."
-    }
+    "status": "success",
+    "model": "gemini-flash-lite-latest",
+    "text_only_fallback": false,
+    "attempts": [],
+    "error": null
   }
 }
