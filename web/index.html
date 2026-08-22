@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>気象資料室 — 保存済み資料</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+</head>
+<body>
+  <header><div><p class="eyebrow">PERSONAL WEATHER STUDY · STATIC ARCHIVE</p><h1>気象資料室</h1></div><span>GitHub Pages</span></header>
+  <main>
+    <section class="hero"><div><p class="eyebrow">SAVED SNAPSHOTS</p><h2>保存した空を、<br><em>あとから読み返す。</em></h2><p>ここでは取得済み資料だけを表示します。新規取得は GitHub Actions の <code>Build weather snapshot</code> から実行してください。</p></div><aside><strong id="snapshot-count">—</strong><span>保存済み snapshot</span></aside></section>
+    <div id="status" class="status">静的データを読み込んでいます…</div>
+    <section class="controls"><div class="section-title"><div><p class="eyebrow">ARCHIVE FILTER</p><h2>保存済み資料を見る</h2></div></div><div class="selectors"><label>日付<select id="date"></select></label><label>地点<select id="location"></select></label></div><div class="filter-head"><b>資料種別フィルター</b><span><button id="select-all">全選択</button><button id="select-none">全解除</button></span></div><div id="filters" class="filters"></div></section>
+    <section><div class="section-title"><div><p class="eyebrow">SNAPSHOT SUMMARY</p><h2 id="snapshot-title">Snapshot</h2></div><span id="generated-at"></span></div><div id="errors"></div><div id="charts" class="chart-sections"></div></section>
+    <section id="forecast-section"><div class="section-title"><div><p class="eyebrow">REFERENCE FORECAST</p><h2>地域の天気予報</h2></div></div><div id="forecast" class="panel empty">保存済み予報はありません。</div></section>
+    <section id="amedas-section"><div class="section-title"><div><p class="eyebrow">OBSERVATION</p><h2>アメダス観測</h2></div></div><div id="amedas" class="panel empty">保存済み観測はありません。</div><div id="station-map"></div></section>
+    <section id="commentary-section"><div class="section-title"><div><p class="eyebrow">OFFICIAL COMMENTARY</p><h2>公式解説・実況テキスト</h2></div></div><div id="commentary"></div></section>
+    <section id="llm-section"><div class="section-title"><div><p class="eyebrow">GENERATED STUDY NOTES</p><h2>Gemini 学習用解説</h2></div></div><p class="notice">この解説は snapshot 生成時に、取得済み資料だけを基に生成された学習用解説です。公式予報ではありません。</p><article id="llm" class="markdown panel empty">解説は生成されていません。</article></section>
+    <section><div class="section-title"><div><p class="eyebrow">EXTERNAL REFERENCES</p><h2>動的地図・公式資料</h2></div></div><div class="links"><a href="https://www.jma.go.jp/bosai/nowc/" target="_blank">降水ナウキャスト ↗</a><a id="windy" target="_blank">Windy ↗</a><a href="https://www.jma.go.jp/bosai/weather_map/" target="_blank">気象庁天気図 ↗</a><a href="https://www.data.jma.go.jp/airinfo/index.html" target="_blank">航空気象情報 ↗</a></div></section>
+    <section><div class="section-title"><div><p class="eyebrow">CATALOG</p><h2>資料カタログ</h2></div></div><div id="catalog" class="catalog"></div></section>
+  </main>
+  <footer>出典：気象庁ほか。発表・有効時刻と最新の防災情報は必ず公式資料で確認してください。</footer>
+  <dialog id="modal"><button id="close" aria-label="閉じる">×</button><img id="modal-image" alt=""><p id="modal-caption"></p></dialog>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script><script src="app.js"></script>
+</body></html>

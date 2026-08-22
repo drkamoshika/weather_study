@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "target_date": "2026-08-15",
+  "location": {
+    "id": "hokkaido",
+    "prefecture": "北海道",
+    "city": "札幌",
+    "latitude": 43.0618,
+    "longitude": 141.3545,
+    "forecast_area_code": "016010",
+    "airport_icao": "RJCC",
+    "airport_name": "新千歳"
+  },
+  "requested_sources": [
+    "weather-map",
+    "asia-analysis"
+  ],
+  "generated_at": "2026-08-23T00:03:30+09:00",
+  "sources": [
+    {
+      "id": "weather-map",
+      "name": "実況天気図（日本周辺）",
+      "category": "地上",
+      "abbreviation": "SPAS",
+      "original_url": "https://www.jma.go.jp/bosai/weather_map/",
+      "local_path": "assets/weather-map.png",
+      "data_path": "data/weather-map.json",
+      "mime_type": "image/png",
+      "fetched_at": "2026-08-16T20:59:57+09:00",
+      "issued_at": null,
+      "valid_from": null,
+      "valid_to": null,
+      "content_hash": "a7818db4fc7cadb8c435df6791ff768bbecfbd737e04ea4101d46360c9be8466",
+      "cache_hit": false,
+      "status": "success",
+      "error": null,
+      "used_by_llm": false,
+      "provenance_note": "Legacy data; issue/valid times may be unknown."
+    },
+    {
+      "id": "asia-analysis",
+      "name": "アジア太平洋 実況天気図",
+      "category": "地上",
+      "abbreviation": "ASAS",
+      "original_url": "https://www.jma.go.jp/bosai/weather_map/",
+      "local_path": "assets/asia-analysis.png",
+      "data_path": "data/asia-analysis.json",
+      "mime_type": "image/png",
+      "fetched_at": "2026-08-16T20:59:57+09:00",
+      "issued_at": null,
+      "valid_from": null,
+      "valid_to": null,
+      "content_hash": "1cb85aa74f9ce83f46bdbe4a15aced508398a4ded3cd997c5f114e2b3dd9050d",
+      "cache_hit": false,
+      "status": "success",
+      "error": null,
+      "used_by_llm": false,
+      "provenance_note": "Legacy data; issue/valid times may be unknown."
+    }
+  ],
+  "llm": {
+    "status": "not_requested",
+    "model": null,
+    "text_only_fallback": false,
+    "error": null
+  },
+  "provenance": {
+    "type": "legacy_migration",
+    "source": "data/state.json",
+    "migrated_at": "2026-08-23T00:03:30+09:00",
+    "target_date_inferred": false
+  }
+}

@@ -1,0 +1,1 @@
+# Python code uses only the standard library. PDF conversion uses Poppler.

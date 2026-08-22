@@ -1,0 +1,57 @@
+name: Build weather snapshot
+on:
+  workflow_dispatch:
+    inputs:
+      date: {description: "対象日 YYYY-MM-DD（空欄はJSTの今日）", required: false, type: string}
+      location: {description: "地点ID（空欄はtokyo）", required: false, default: tokyo, type: string}
+      sources: {description: "all / standard / カンマ区切り（空欄はall）", required: false, default: all, type: string}
+      force: {description: "既存成功資料も再取得する", required: false, default: false, type: boolean}
+permissions: {contents: write, pages: write, id-token: write}
+concurrency: {group: weather-pages, cancel-in-progress: false}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Install PDF converter
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - name: Normalize inputs
+        id: inputs
+        env: {REQUESTED_DATE: "${{ inputs.date }}", REQUESTED_LOCATION: "${{ inputs.location }}", REQUESTED_SOURCES: "${{ inputs.sources }}"}
+        run: |
+          if [ -n "$REQUESTED_DATE" ]; then echo "target_date=$REQUESTED_DATE" >> "$GITHUB_OUTPUT"; else echo "target_date=$(TZ=Asia/Tokyo date +%F)" >> "$GITHUB_OUTPUT"; fi
+          if [ -n "$REQUESTED_LOCATION" ]; then echo "location_id=$REQUESTED_LOCATION" >> "$GITHUB_OUTPUT"; else echo "location_id=tokyo" >> "$GITHUB_OUTPUT"; fi
+          if [ -n "$REQUESTED_SOURCES" ]; then echo "source_ids=$REQUESTED_SOURCES" >> "$GITHUB_OUTPUT"; else echo "source_ids=all" >> "$GITHUB_OUTPUT"; fi
+      - name: Collect snapshot
+        env: {TARGET_DATE: "${{ steps.inputs.outputs.target_date }}", LOCATION_ID: "${{ steps.inputs.outputs.location_id }}", SOURCE_IDS: "${{ steps.inputs.outputs.source_ids }}", FORCE: "${{ inputs.force }}"}
+        run: |
+          arguments=(--date "$TARGET_DATE" --location "$LOCATION_ID" --sources "$SOURCE_IDS")
+          if [ "$FORCE" = "true" ]; then arguments+=(--force); fi
+          python3 scripts/collect.py "${arguments[@]}"
+      - name: Generate Gemini study notes
+        env: {GEMINI_API_KEY: "${{ secrets.GEMINI_API_KEY }}", GEMINI_MODEL: "${{ vars.GEMINI_MODEL }}", TARGET_DATE: "${{ steps.inputs.outputs.target_date }}", LOCATION_ID: "${{ steps.inputs.outputs.location_id }}"}
+        run: python3 scripts/generate_llm_analysis.py --date "$TARGET_DATE" --location "$LOCATION_ID"
+      - name: Save snapshots in repository
+        env: {TARGET_DATE: "${{ steps.inputs.outputs.target_date }}", LOCATION_ID: "${{ steps.inputs.outputs.location_id }}"}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "data/snapshots/$TARGET_DATE/$LOCATION_ID"
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "data: update weather snapshot $TARGET_DATE $LOCATION_ID"
+          git pull --rebase
+          git push
+      - run: python3 scripts/build_static.py
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with: {path: dist}
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: {name: github-pages, url: "${{ steps.deployment.outputs.page_url }}"}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

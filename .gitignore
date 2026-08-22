@@ -1,0 +1,14 @@
+__pycache__/
+.pycache/
+*.py[cod]
+.DS_Store
+# dist is reproducible; snapshots are intentionally committed.
+dist/
+
+# Local environment / secrets
+.env
+.env.*
+
+# Python virtual environments
+.venv/
+venv/

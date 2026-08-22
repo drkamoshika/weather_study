@@ -1,0 +1,8 @@
+{
+  "hokkaido":["RJCC","新千歳"],"aomori":["RJSA","青森"],"iwate":["RJSI","花巻"],"miyagi":["RJSS","仙台"],"akita":["RJSK","秋田"],"yamagata":["RJSC","山形"],"fukushima":["RJSF","福島"],
+  "ibaraki":["RJAH","茨城"],"tochigi":["RJTT","東京国際"],"gunma":["RJTT","東京国際"],"saitama":["RJTT","東京国際"],"chiba":["RJAA","成田国際"],"tokyo":["RJTT","東京国際"],"kanagawa":["RJTT","東京国際"],
+  "niigata":["RJSN","新潟"],"toyama":["RJNT","富山"],"ishikawa":["RJNK","小松"],"fukui":["RJNA","県営名古屋"],"yamanashi":["RJTT","東京国際"],"nagano":["RJAF","松本"],
+  "gifu":["RJGG","中部国際"],"shizuoka":["RJNS","静岡"],"aichi":["RJGG","中部国際"],"mie":["RJGG","中部国際"],"shiga":["RJOO","大阪国際"],"kyoto":["RJOO","大阪国際"],"osaka":["RJOO","大阪国際"],"hyogo":["RJBE","神戸"],"nara":["RJOO","大阪国際"],"wakayama":["RJOO","大阪国際"],
+  "tottori":["RJOR","鳥取"],"shimane":["RJOC","出雲"],"okayama":["RJOB","岡山"],"hiroshima":["RJOA","広島"],"yamaguchi":["RJDC","山口宇部"],"tokushima":["RJOS","徳島"],"kagawa":["RJOT","高松"],"ehime":["RJOM","松山"],"kochi":["RJOK","高知"],
+  "fukuoka":["RJFF","福岡"],"saga":["RJFS","佐賀"],"nagasaki":["RJFU","長崎"],"kumamoto":["RJFT","熊本"],"oita":["RJFO","大分"],"miyazaki":["RJFM","宮崎"],"kagoshima":["RJFK","鹿児島"],"okinawa":["ROAH","那覇"]
+}
