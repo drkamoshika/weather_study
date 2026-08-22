@@ -28,7 +28,8 @@ def build(output: Path = DIST) -> int:
     public_sources = [{key: source.get(key) for key in ("id", "name", "category", "abbreviation", "view")}
                       for source in sources()]
     write_json(output / "index.json", {"schema_version": 1, "snapshots": entries,
-                                        "locations": locations(), "sources": public_sources})
+                                        "locations": locations(), "sources": public_sources,
+                                        "glossary": read_json(ROOT / "config" / "glossary.json")})
     (output / ".nojekyll").touch()
     return len(entries)
 

@@ -16,7 +16,10 @@ class PipelineTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             output=Path(temporary)/"site"; self.assertGreater(build_static.build(output),0)
             self.assertNotIn("/api/",(output/"app.js").read_text())
-            for path in output.rglob("*"):
+            built_index=json.loads((output/"index.json").read_text())
+            self.assertGreaterEqual(len(built_index["glossary"]["reading_guides"]),6)
+            self.assertGreaterEqual(len(built_index["glossary"]["abbreviations"]),10)
+            for path in output.iterdir():
                 if path.is_file() and path.suffix in (".js",".html",".json",".md"):
                     self.assertNotIn("/api/",path.read_text(errors="ignore"))
             for item in json.loads((output/"index.json").read_text())["snapshots"]:
@@ -50,4 +53,25 @@ class PipelineTests(unittest.TestCase):
                 self.assertFalse(generate_llm_analysis.generate("2026-08-23","tokyo"))
             saved=json.loads((out/"manifest.json").read_text())
             self.assertEqual(saved["llm"]["status"],"skipped")
+    def test_gemini_falls_back_from_unavailable_configured_model(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            out=Path(temporary); manifest=collect.empty_manifest("2026-08-23",collect.locations()[12],[])
+            collect.write_json(out/"manifest.json",manifest)
+            def fake_request(path,_key,body=None):
+                if path=="/models":
+                    return {"models":[
+                        {"name":"models/gemini-2.5-flash","modelStatus":"STABLE","supportedGenerationMethods":["generateContent"]},
+                        {"name":"models/gemini-3.6-flash","modelStatus":"STABLE","supportedGenerationMethods":["generateContent"]}]}
+                if "gemini-2.5-flash" in path: raise RuntimeError("HTTP 404 retired")
+                return {"candidates":[{"content":{"parts":[{"text":"# 解説"}]}}]}
+            with patch.object(generate_llm_analysis,"snapshot_dir",lambda *_:out),patch.object(generate_llm_analysis,"request_json",fake_request),patch.dict(generate_llm_analysis.os.environ,{"GEMINI_API_KEY":"test-only"},clear=True):
+                self.assertTrue(generate_llm_analysis.generate("2026-08-23","tokyo","gemini-2.5-flash"))
+            saved=json.loads((out/"manifest.json").read_text())
+            self.assertEqual(saved["llm"]["model"],"gemini-3.6-flash")
+            self.assertTrue(saved["llm"]["attempts"])
+    def test_workflow_schedules_collection_and_gemini(self):
+        workflow=(ROOT/".github/workflows/build-weather.yml").read_text()
+        self.assertIn('cron: "0 22 * * *"',workflow)
+        self.assertLess(workflow.index("scripts/collect.py"),workflow.index("scripts/generate_llm_analysis.py"))
+        self.assertLess(workflow.index("scripts/generate_llm_analysis.py"),workflow.index("scripts/build_static.py"))
 if __name__=="__main__": unittest.main()

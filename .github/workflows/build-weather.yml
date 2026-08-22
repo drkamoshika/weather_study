@@ -1,5 +1,8 @@
 name: Build weather snapshot
 on:
+  schedule:
+    # GitHub cron is UTC: 22:00 UTC is 07:00 JST on the following day.
+    - cron: "0 22 * * *"
   workflow_dispatch:
     inputs:
       date: {description: "対象日 YYYY-MM-DD（空欄はJSTの今日）", required: false, type: string}

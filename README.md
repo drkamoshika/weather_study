@@ -99,13 +99,12 @@ API キーは環境変数または GitHub Actions Secret だけで使用しま�
 ```sh
 read -s GEMINI_API_KEY
 export GEMINI_API_KEY
-# 任意。省略時はgenerateContent対応モデルから候補を選択
-export GEMINI_MODEL='gemini-2.5-flash'
+# GEMINI_MODELは任意。通常は未設定のまま利用可能モデルを自動選択
 python3 scripts/generate_llm_analysis.py --date 2026-08-22 --location tokyo
 python3 scripts/build_static.py
 ```
 
-モデル一覧から `generateContent` 対応の Gemini モデルだけを使い、画像専用・TTS・agent系を除外します。画像付き呼び出しが失敗したら text-only fallback を一度行い、HTTP status、APIエラー、model、fallback有無を秘密値なしで manifest に残します。リアルタイムチャットはありません。
+モデル一覧から `generateContent` 対応の Gemini モデルだけを使い、画像専用・TTS・agent系、廃止・非推奨状態のモデルを除外します。`GEMINI_MODEL` で指定したモデルが利用不能・廃止済みでも、一覧内の安定版Flashモデルを順に試します。画像入力が使えない場合は同じモデルのtext-only、さらに失敗した場合は次のモデルへフォールバックし、試行モデル、HTTPエラー、fallback有無を秘密値なしでmanifestに残します。リアルタイムチャットはありません。
 
 ## 5. GitHub Actions と Pages
 
@@ -122,7 +121,9 @@ python3 scripts/build_static.py
 
 したがって入力を何も変更せず **Run workflow** を押すだけで、「日本時間の今日・東京・全資料」を取得します。
 
-workflow は checkout、Python、Poppler、collector、Gemini、snapshot の commit/push、static build、Pages artifact upload、deploy の順です。同時実行は直列化し、手動実行だけなので snapshot の push で再実行ループしません。`contents: write`、`pages: write`、`id-token: write` が必要です。
+workflow は checkout、Python、Poppler、collector、Gemini、snapshot の commit/push、static build、Pages artifact upload、deploy の順です。同時実行は直列化し、pushイベントでは起動しないためsnapshotのpushで再実行ループしません。`contents: write`、`pages: write`、`id-token: write` が必要です。
+
+手動実行に加えて、毎日 **日本時間 7:00** に定期実行します。GitHub Actions の cron はUTCのため、workflowには `0 22 * * *`（前日22:00 UTC）を設定しています。定期実行時も「当日・東京・全資料」を取得し、`GEMINI_API_KEY` が設定済みなら同じrunの中でGemini解説を生成してからPagesを更新します。GitHub側の混雑により開始が遅れる場合があります。
 
 2026-08-23 時点の GitHub 公式例に合わせ、`configure-pages@v5`、`upload-pages-artifact@v4`、`deploy-pages@v4` を使用しています。private repository の Pages 可否はプランに依存するため、公開範囲を決める際に最新仕様を確認してください。
 
