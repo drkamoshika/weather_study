@@ -34,27 +34,8 @@
     "aviation:fbjp12",
     "aviation:sigmet"
   ],
-  "generated_at": "2026-08-23T17:10:27+09:00",
+  "generated_at": "2026-08-23T17:04:16+09:00",
   "sources": [
-    {
-      "id": "weather-map",
-      "name": "実況天気図（日本周辺）",
-      "category": "地上",
-      "abbreviation": "SPAS",
-      "original_url": "https://www.jma.go.jp/bosai/weather_map/data/png/20260823080530_0_Z__C_010000_20260823060000_MET_CHT_JCIspas_JCP600x581_JRcolor_Tjmahp_image.png",
-      "local_path": "assets/weather-map.png",
-      "data_path": null,
-      "mime_type": "image/png",
-      "fetched_at": "2026-08-23T17:10:27+09:00",
-      "issued_at": null,
-      "valid_from": null,
-      "valid_to": null,
-      "content_hash": "fa82da990aa79c5b671b0b1badfde19948a4afa10f71a60bea915b72bef018d2",
-      "cache_hit": false,
-      "status": "success",
-      "error": null,
-      "used_by_llm": false
-    },
     {
       "id": "amedas",
       "name": "アメダス観測",
@@ -75,70 +56,80 @@
       "used_by_llm": true
     },
     {
+      "id": "weather-map",
+      "name": "実況天気図（日本周辺）",
+      "category": "地上",
+      "abbreviation": "SPAS",
+      "original_url": "https://www.jma.go.jp/bosai/weather_map/data/png/20260823050700_0_Z__C_010000_20260823030000_MET_CHT_JCIspas_JCP600x581_JRcolor_Tjmahp_image.png",
+      "local_path": "assets/weather-map.png",
+      "data_path": null,
+      "mime_type": "image/png",
+      "fetched_at": "2026-08-23T17:04:16+09:00",
+      "issued_at": null,
+      "valid_from": null,
+      "valid_to": null,
+      "content_hash": "5f94ec037eb9db0cccb48cb9ca997eba80fa677678a168f651a7d7c4f1f97f6a",
+      "cache_hit": false,
+      "status": "success",
+      "error": null,
+      "used_by_llm": true
+    },
+    {
       "id": "asia-analysis",
       "name": "アジア太平洋 実況天気図",
       "category": "地上",
       "abbreviation": "ASAS",
-      "original_url": "https://www.jma.go.jp/bosai/weather_map/data/list.json",
-      "local_path": null,
+      "original_url": "https://www.jma.go.jp/bosai/weather_map/data/png/20260823024501_0_Z__C_010000_20260823000000_MET_CHT_JCIasas_JCP600x512_JRcolor_Tjmahp_image.png",
+      "local_path": "assets/asia-analysis.png",
       "data_path": null,
-      "mime_type": null,
-      "fetched_at": "2026-08-23T09:38:04+09:00",
+      "mime_type": "image/png",
+      "fetched_at": "2026-08-23T17:02:59+09:00",
       "issued_at": null,
       "valid_from": null,
       "valid_to": null,
-      "content_hash": null,
-      "cache_hit": false,
-      "status": "unavailable",
-      "error": {
-        "type": "FileNotFoundError",
-        "message": "公式直近履歴に2026-08-23の資料がありません"
-      },
-      "used_by_llm": false
+      "content_hash": "d9b62d08ddab3ae36ad92abec219621a4d11b2387ddc46dc3981f6c475670d23",
+      "cache_hit": true,
+      "status": "cached",
+      "error": null,
+      "used_by_llm": true
     },
     {
       "id": "asia-forecast24",
       "name": "アジア太平洋 24時間予想天気図",
       "category": "地上",
       "abbreviation": "FSAS24",
-      "original_url": "https://www.jma.go.jp/bosai/weather_map/data/list.json",
-      "local_path": null,
+      "original_url": "https://www.jma.go.jp/bosai/weather_map/data/png/20260823052930_0_Z__C_010000_20260823000000_MET_CHT_JCIfsas24_JCP600x512_JRcolor_Tjmahp_image.png",
+      "local_path": "assets/asia-forecast24.png",
       "data_path": null,
-      "mime_type": null,
-      "fetched_at": "2026-08-23T09:38:04+09:00",
+      "mime_type": "image/png",
+      "fetched_at": "2026-08-23T17:03:00+09:00",
       "issued_at": null,
       "valid_from": null,
       "valid_to": null,
-      "content_hash": null,
-      "cache_hit": false,
-      "status": "unavailable",
-      "error": {
-        "type": "FileNotFoundError",
-        "message": "公式直近履歴に2026-08-23の資料がありません"
-      },
-      "used_by_llm": false
+      "content_hash": "04c469c08361ee96bbe1e1969a8cdeaf0f2d3eefc6f38104ac5e5629db013558",
+      "cache_hit": true,
+      "status": "cached",
+      "error": null,
+      "used_by_llm": true
     },
     {
       "id": "asia-forecast48",
       "name": "アジア太平洋 48時間予想天気図",
       "category": "地上",
       "abbreviation": "FSAS48",
-      "original_url": "https://www.jma.go.jp/bosai/weather_map/data/list.json",
-      "local_path": null,
+      "original_url": "https://www.jma.go.jp/bosai/weather_map/data/png/20260823074000_0_Z__C_010000_20260823000000_MET_CHT_JCIfsas48_JCP600x512_JRcolor_Tjmahp_image.png",
+      "local_path": "assets/asia-forecast48.png",
       "data_path": null,
-      "mime_type": null,
-      "fetched_at": "2026-08-23T09:38:04+09:00",
+      "mime_type": "image/png",
+      "fetched_at": "2026-08-23T17:03:01+09:00",
       "issued_at": null,
       "valid_from": null,
       "valid_to": null,
-      "content_hash": null,
-      "cache_hit": false,
-      "status": "unavailable",
-      "error": {
-        "type": "FileNotFoundError",
-        "message": "公式直近履歴に2026-08-23の資料がありません"
-      },
-      "used_by_llm": false
+      "content_hash": "2a3bf5fd18bbeeb6560a9785365619bf5fe989761a56fad70aa9111c8811e0f0",
+      "cache_hit": true,
+      "status": "cached",
+      "error": null,
+      "used_by_llm": true
     },
     {
       "id": "upper-850",
@@ -157,7 +148,7 @@
       "cache_hit": true,
       "status": "cached",
       "error": null,
-      "used_by_llm": true
+      "used_by_llm": false
     },
     {
       "id": "upper-500",
@@ -176,7 +167,7 @@
       "cache_hit": true,
       "status": "cached",
       "error": null,
-      "used_by_llm": true
+      "used_by_llm": false
     },
     {
       "id": "numeric",
@@ -214,7 +205,7 @@
       "cache_hit": true,
       "status": "cached",
       "error": null,
-      "used_by_llm": true
+      "used_by_llm": false
     },
     {
       "id": "numeric-2week",
@@ -233,7 +224,7 @@
       "cache_hit": true,
       "status": "cached",
       "error": null,
-      "used_by_llm": true
+      "used_by_llm": false
     },
     {
       "id": "numeric-month",
@@ -446,9 +437,10 @@
     }
   ],
   "llm": {
-    "status": "not_requested",
-    "model": null,
+    "status": "success",
+    "model": "gemini-flash-lite-latest",
     "text_only_fallback": false,
+    "attempts": [],
     "error": null
   }
 }
