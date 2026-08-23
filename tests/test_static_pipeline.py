@@ -45,6 +45,21 @@ class PipelineTests(unittest.TestCase):
         taf=next(item for item in collect.sources() if item["id"]=="aviation:taf")
         self.assertIn("QMCD98_RJTT.png",taf["url"].format(airport_icao=locations["tokyo"]["airport_icao"]))
         self.assertIn("QMCD98_RJCC.png",taf["url"].format(airport_icao=locations["hokkaido"]["airport_icao"]))
+    def test_current_weather_map_uses_latest_official_chart(self):
+        today=collect.datetime.now(collect.JST).date().isoformat()
+        previous="20000101000000_sample.png"
+        listing={"near":{"now":[previous]},"asia":{"now":[previous],"ft24":[previous],"ft48":[previous]}}
+        calls=[]
+        def fake_download(url):
+            calls.append(url)
+            if url.endswith("list.json"): return json.dumps(listing).encode(),"application/json"
+            return b"png","image/png"
+        source=next(item for item in collect.sources() if item["id"]=="weather-map")
+        with patch.object(collect,"download",fake_download):
+            raw,suffix,url=collect.collect_weather_map(source,today)
+        self.assertEqual(raw,b"png"); self.assertEqual(suffix,".png"); self.assertTrue(url.endswith(previous))
+        with patch.object(collect,"download",fake_download):
+            with self.assertRaises(FileNotFoundError): collect.collect_weather_map(source,"1999-01-01")
     def test_missing_gemini_key_is_a_successful_skip(self):
         with tempfile.TemporaryDirectory() as temporary:
             out=Path(temporary); manifest=collect.empty_manifest("2026-08-23",collect.locations()[12],[])
@@ -93,4 +108,8 @@ class PipelineTests(unittest.TestCase):
         self.assertNotIn("api.github.com",script)
         self.assertNotIn("GEMINI_API_KEY",script)
         self.assertNotIn("github_pat_",script)
+        self.assertIn("資料を集めて、",html)
+        self.assertIn('id="windy-embed"',html)
+        self.assertIn('id="toggle-windy"',html)
+        self.assertIn(".reading-guides {\n  display: block",(ROOT/"web/legacy-ui.css").read_text())
 if __name__=="__main__": unittest.main()

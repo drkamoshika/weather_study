@@ -34,8 +34,27 @@
     "aviation:fbjp12",
     "aviation:sigmet"
   ],
-  "generated_at": "2026-08-23T09:38:03+09:00",
+  "generated_at": "2026-08-23T17:10:27+09:00",
   "sources": [
+    {
+      "id": "weather-map",
+      "name": "実況天気図（日本周辺）",
+      "category": "地上",
+      "abbreviation": "SPAS",
+      "original_url": "https://www.jma.go.jp/bosai/weather_map/data/png/20260823080530_0_Z__C_010000_20260823060000_MET_CHT_JCIspas_JCP600x581_JRcolor_Tjmahp_image.png",
+      "local_path": "assets/weather-map.png",
+      "data_path": null,
+      "mime_type": "image/png",
+      "fetched_at": "2026-08-23T17:10:27+09:00",
+      "issued_at": null,
+      "valid_from": null,
+      "valid_to": null,
+      "content_hash": "fa82da990aa79c5b671b0b1badfde19948a4afa10f71a60bea915b72bef018d2",
+      "cache_hit": false,
+      "status": "success",
+      "error": null,
+      "used_by_llm": false
+    },
     {
       "id": "amedas",
       "name": "アメダス観測",
@@ -54,28 +73,6 @@
       "status": "cached",
       "error": null,
       "used_by_llm": true
-    },
-    {
-      "id": "weather-map",
-      "name": "実況天気図（日本周辺）",
-      "category": "地上",
-      "abbreviation": "SPAS",
-      "original_url": "https://www.jma.go.jp/bosai/weather_map/data/list.json",
-      "local_path": null,
-      "data_path": null,
-      "mime_type": null,
-      "fetched_at": "2026-08-23T09:38:04+09:00",
-      "issued_at": null,
-      "valid_from": null,
-      "valid_to": null,
-      "content_hash": null,
-      "cache_hit": false,
-      "status": "unavailable",
-      "error": {
-        "type": "FileNotFoundError",
-        "message": "公式直近履歴に2026-08-23の資料がありません"
-      },
-      "used_by_llm": false
     },
     {
       "id": "asia-analysis",
@@ -449,13 +446,9 @@
     }
   ],
   "llm": {
-    "status": "failed",
-    "model": "gemini-flash-lite-latest",
+    "status": "not_requested",
+    "model": null,
     "text_only_fallback": false,
-    "attempts": [],
-    "error": {
-      "type": "TimeoutError",
-      "message": "The read operation timed out"
-    }
+    "error": null
   }
 }

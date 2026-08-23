@@ -11,6 +11,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+import time
 import unicodedata
 import urllib.error
 import urllib.parse
@@ -24,8 +25,18 @@ USER_AGENT = "personal-weather-study-static/1.0 (+GitHub Actions)"
 
 def download(url: str) -> tuple[bytes, str | None]:
     request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(request, timeout=45) as response:
-        return response.read(), response.headers.get_content_type()
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(request, timeout=45) as response:
+                return response.read(), response.headers.get_content_type()
+        except urllib.error.HTTPError as error:
+            if error.code not in (429, 500, 502, 503, 504) or attempt == 2:
+                raise
+        except (urllib.error.URLError, TimeoutError, ConnectionError, OSError):
+            if attempt == 2:
+                raise
+        time.sleep(2 ** attempt)
+    raise RuntimeError("download retry exhausted")
 
 def normalize(text: str) -> str:
     return unicodedata.normalize("NFKC", text or "").replace(" ", "").replace("　", "").replace("\ufeff", "").lower()
@@ -71,7 +82,8 @@ def collect_amedas(source: dict, location: dict) -> tuple[dict, str, str]:
 def collect_weather_map(source: dict, target_date: str) -> tuple[bytes, str, str]:
     raw, _ = download(source["url"]); listing=json.loads(raw)
     keys={"weather-map":("near","now"),"asia-analysis":("asia","now"),"asia-forecast24":("asia","ft24"),"asia-forecast48":("asia","ft48")}
-    region,timing=keys[source["id"]]; candidates=[x for x in listing[region][timing] if target_date.replace("-","") in x]
+    region,timing=keys[source["id"]]; filenames=listing[region][timing]
+    candidates=filenames if target_date==datetime.now(JST).date().isoformat() else [x for x in filenames if target_date.replace("-","") in x]
     if not candidates: raise FileNotFoundError(f"公式直近履歴に{target_date}の資料がありません")
     url="https://www.jma.go.jp/bosai/weather_map/data/png/"+candidates[-1]
     return download(url)[0], Path(candidates[-1]).suffix or ".png", url
