@@ -34,7 +34,7 @@
     "aviation:fbjp12",
     "aviation:sigmet"
   ],
-  "generated_at": "2026-08-23T17:02:58+09:00",
+  "generated_at": "2026-08-23T17:04:16+09:00",
   "sources": [
     {
       "id": "amedas",
@@ -60,22 +60,19 @@
       "name": "実況天気図（日本周辺）",
       "category": "地上",
       "abbreviation": "SPAS",
-      "original_url": "https://www.jma.go.jp/bosai/weather_map/data/list.json",
-      "local_path": null,
+      "original_url": "https://www.jma.go.jp/bosai/weather_map/data/png/20260823050700_0_Z__C_010000_20260823030000_MET_CHT_JCIspas_JCP600x581_JRcolor_Tjmahp_image.png",
+      "local_path": "assets/weather-map.png",
       "data_path": null,
-      "mime_type": null,
-      "fetched_at": "2026-08-23T17:02:59+09:00",
+      "mime_type": "image/png",
+      "fetched_at": "2026-08-23T17:04:16+09:00",
       "issued_at": null,
       "valid_from": null,
       "valid_to": null,
-      "content_hash": null,
+      "content_hash": "5f94ec037eb9db0cccb48cb9ca997eba80fa677678a168f651a7d7c4f1f97f6a",
       "cache_hit": false,
-      "status": "failed",
-      "error": {
-        "type": "URLError",
-        "message": "<urlopen error [Errno 104] Connection reset by peer>"
-      },
-      "used_by_llm": false
+      "status": "success",
+      "error": null,
+      "used_by_llm": true
     },
     {
       "id": "asia-analysis",
@@ -91,8 +88,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "d9b62d08ddab3ae36ad92abec219621a4d11b2387ddc46dc3981f6c475670d23",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -110,8 +107,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "04c469c08361ee96bbe1e1969a8cdeaf0f2d3eefc6f38104ac5e5629db013558",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -129,8 +126,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "2a3bf5fd18bbeeb6560a9785365619bf5fe989761a56fad70aa9111c8811e0f0",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -151,7 +148,7 @@
       "cache_hit": true,
       "status": "cached",
       "error": null,
-      "used_by_llm": true
+      "used_by_llm": false
     },
     {
       "id": "upper-500",
