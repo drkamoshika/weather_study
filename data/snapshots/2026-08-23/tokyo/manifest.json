@@ -34,7 +34,7 @@
     "aviation:fbjp12",
     "aviation:sigmet"
   ],
-  "generated_at": "2026-08-23T17:04:16+09:00",
+  "generated_at": "2026-08-23T17:24:15+09:00",
   "sources": [
     {
       "id": "amedas",
@@ -69,8 +69,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "5f94ec037eb9db0cccb48cb9ca997eba80fa677678a168f651a7d7c4f1f97f6a",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
