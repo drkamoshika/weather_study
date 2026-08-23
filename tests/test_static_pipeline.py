@@ -74,4 +74,23 @@ class PipelineTests(unittest.TestCase):
         self.assertIn('cron: "0 22 * * *"',workflow)
         self.assertLess(workflow.index("scripts/collect.py"),workflow.index("scripts/generate_llm_analysis.py"))
         self.assertLess(workflow.index("scripts/generate_llm_analysis.py"),workflow.index("scripts/build_static.py"))
+    def test_worker_trigger_ui_contract_and_security(self):
+        html=(ROOT/"web/index.html").read_text()
+        script=(ROOT/"web/app.js").read_text()
+        stylesheet=ROOT/"web/trigger.css"
+        for element_id in ("snapshot-request-date","snapshot-request-location","snapshot-request-sources","snapshot-request-force","snapshot-trigger-button","snapshot-trigger-status","snapshot-trigger-link"):
+            self.assertIn(f'id="{element_id}"',html)
+        self.assertTrue(stylesheet.is_file())
+        self.assertIn("https://weather-study-trigger.lvtm-pal.workers.dev",script)
+        self.assertIn('method:"POST"',script)
+        self.assertIn('/status?run_id=',script)
+        self.assertIn("weather_study_active_run_v1",script)
+        self.assertIn("localStorage.setItem",script)
+        self.assertIn("localStorage.getItem",script)
+        self.assertIn("setTimeout(checkActiveRunStatus",script)
+        self.assertIn("location.assign(next.href)",script)
+        self.assertIn("activeRun||actionsDispatchPending",script)
+        self.assertNotIn("api.github.com",script)
+        self.assertNotIn("GEMINI_API_KEY",script)
+        self.assertNotIn("github_pat_",script)
 if __name__=="__main__": unittest.main()

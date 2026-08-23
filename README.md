@@ -127,6 +127,25 @@ workflow は checkout、Python、Poppler、collector、Gemini、snapshot の com
 
 2026-08-23 時点の GitHub 公式例に合わせ、`configure-pages@v5`、`upload-pages-artifact@v4`、`deploy-pages@v4` を使用しています。private repository の Pages 可否はプランに依存するため、公開範囲を決める際に最新仕様を確認してください。
 
+## Web画面からの更新
+
+GitHub Pagesの「新しい気象資料を取得」パネルから、次のCloudflare Workerを経由して既存の `Build weather snapshot` workflowを開始できます。
+
+```text
+https://weather-study-trigger.lvtm-pal.workers.dev
+```
+
+画面では対象日、地点、`all / standard / 現在チェック中の資料`、強制再取得を指定できます。ブラウザはWorkerへPOSTし、返された `run_id` を使って `/status` を約5秒ごとに確認します。実行中はボタンと入力を無効化し、完了後は取得した日付・地点のURLへ自動的に再読込します。
+
+実行中の情報は `localStorage` の `weather_study_active_run_v1` に保存するため、途中でページを再読込しても同じActions runの追跡を再開します。保存するのは `run_id`、Actions URL、選択値、開始時刻だけです。GitHub Token、Gemini API keyなどのSecretはHTML、JavaScript、localStorageへ保存しません。
+
+Cloudflare側ではWorkerのSecretとしてGitHub Tokenと対象repository情報を設定し、Pagesのoriginに対するCORSを許可してください。Workerは次の契約を実装する必要があります。
+
+- `POST /`: `date`、`location`、`sources`、`force` を受け取りworkflow_dispatchし、`run_id` と `html_url` を返す
+- `GET /status?run_id=...`: Actions runの `status`、`conclusion`、`html_url` を返す
+
+Workerの作成・Secret設定はCloudflare GUIで行います。ブラウザからGitHub APIを直接呼ぶ実装にはしないでください。
+
 ## snapshot と manifest
 
 ```text
