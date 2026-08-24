@@ -52,8 +52,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "05f2232d4052cf590c4362eda1ead684c89e0b178bfec86b2c48bd0028384cb5",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -71,8 +71,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "6a4c5e6e00371f861f0d6a24380454f12fdd01c021685043b90bb40278e7ab89",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -90,8 +90,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "68e3c28e4ee106d2718730174ca189b492c7542ff978117cf76df9430ca32398",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -109,8 +109,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "16dd829336010de22aa1787043667b24efe9398f758fceaba9be21c89845bbc0",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -128,8 +128,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "620c777538ddd7b33bee6fb2fdc2cad1f20420966a2cfa1a6adbed68ebc310db",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -147,10 +147,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "91fe5f33c181d408b9c96cc18211f541ea734dfdf0bb6e2728be23698e5206da",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "upper-500",
@@ -166,10 +166,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "0f8989d5134e4108d630fa0372b43a35b72cbe61fd536e278677bea8deb1a466",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "numeric",
@@ -185,10 +185,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "54a33b3bfacfcb49a323883229fdddd1f71edd39ade82090a607ae92ee2b73f7",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "numeric-week",
@@ -204,10 +204,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "3cff6fadfdd7fe5caf21530f8d0d7ff90258aee17e9c4bd393b865eb1ab5cd4c",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "numeric-2week",
@@ -223,10 +223,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "858ad1c55d98189f988fc633e1793b83c4a19037bdeb16f8b007d3a81aaf0c4e",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "numeric-month",
@@ -242,10 +242,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "af0cd5141366a47c862b2442c0ad9914531736c7d99d190938f9ec2660c5c9df",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "forecast",
@@ -261,8 +261,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "326e6957f9564acb91afe7f6d8c2ced0ab1a85cbd7f3aa4452240339735f7fe1",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -280,10 +280,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "c3900173e5e92c8d064483f4043a23db65992196fd69e619bf64fd0d3409d0e9",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "briefing-week",
@@ -299,10 +299,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "4423d373b1daeb689dad35ad50163eab93582594891cb679531950be6f30c023",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "past-observation-text",
@@ -318,8 +318,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "21f6905dd995fc07312b42d3e4caf2f4f61cf896b5de4c5a6772feca76374190",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -337,10 +337,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "23feb48484f866dd975b7d5437fb8b7d58bd2dfa573cedae93eb656e14e01a53",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "aviation:low_level",
@@ -356,10 +356,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "c2579f52aa077e41e89ccad713a43504f2895c2e102aa7ca5a8b1c1d43b957ea",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "aviation:low_level_detail",
@@ -375,10 +375,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "3c0a7c0f19a03cd274d8675fccec5a915eecfaa9c1af8b1bfc6d4ec26afcbfb2",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "aviation:taf",
@@ -394,10 +394,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "3451aeb0a60b66d2c06e7200e51ed02ee10150aec832d3f45dc2ca71187f8f9b",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "aviation:fbjp12",
@@ -413,10 +413,10 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "8d76946c91c83bc3a2edce06bddceb8bae80a256ff14cab9cc68ec34e201f23a",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     },
     {
       "id": "aviation:sigmet",
@@ -432,40 +432,43 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "4916b4cf15a24168a2f1e1992ff7f0f9097c9a205a78647d6ec1decbcf2d0730",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
-      "used_by_llm": false
+      "used_by_llm": true
     }
   ],
   "llm": {
     "status": "success",
-    "model": "gemini-flash-lite-latest",
-    "generated_at": "2026-08-24T12:55:57+09:00",
+    "model": "gemini-flash-latest",
+    "generated_at": "2026-08-24T13:36:45+09:00",
     "input_sources": [
       "amedas",
       "weather-map",
       "asia-analysis",
       "asia-forecast24",
       "asia-forecast48",
+      "upper-850",
+      "upper-500",
+      "numeric",
+      "numeric-week",
+      "numeric-2week",
+      "numeric-month",
       "forecast",
-      "past-observation-text"
+      "briefing-short",
+      "briefing-week",
+      "past-observation-text",
+      "aviation:fbjp",
+      "aviation:low_level",
+      "aviation:low_level_detail",
+      "aviation:taf",
+      "aviation:fbjp12",
+      "aviation:sigmet"
     ],
     "markdown_path": "llm-analysis.md",
     "metadata_path": "llm-analysis.json",
     "text_only_fallback": false,
-    "attempts": [
-      {
-        "model": "gemini-flash-latest",
-        "mode": "multimodal",
-        "error": "Gemini HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later."
-      },
-      {
-        "model": "gemini-flash-latest",
-        "mode": "text_only",
-        "error": "Gemini HTTP 503: This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later."
-      }
-    ],
+    "attempts": [],
     "error": null
   }
 }
