@@ -3,7 +3,7 @@ import hashlib, json, sys, tempfile, unittest
 from pathlib import Path
 from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-import build_static, collect, generate_llm_analysis, migrate_existing_data
+import build_static, collect, common, generate_llm_analysis, migrate_existing_data
 ROOT = Path(__file__).resolve().parents[1]
 def digest(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 class PipelineTests(unittest.TestCase):
@@ -32,12 +32,14 @@ class PipelineTests(unittest.TestCase):
                 data=target/"data"/"amedas.json"; data.parent.mkdir(parents=True,exist_ok=True); data.write_text("{}")
                 entry=collect.source_entry(definition); entry["data_path"]="data/amedas.json"; return entry
             with patch.object(collect,"snapshot_dir",lambda *_:out),patch.object(collect,"collect_one",fake_one):
-                first=collect.collect("2026-08-22","tokyo",["amedas","forecast"])
+                with patch.object(collect,"build_archive_index",lambda:None):
+                    first=collect.collect("2026-08-22","tokyo",["amedas","forecast"],collection_mode="scheduled")
                 self.assertEqual([x["status"] for x in first["sources"]],["success","failed"])
-                second=collect.collect("2026-08-22","tokyo",["amedas"])
+                self.assertEqual(first["schema_version"],2); self.assertEqual(first["collection_mode"],"scheduled"); self.assertTrue(first["collector_version"])
+                with patch.object(collect,"build_archive_index",lambda:None): second=collect.collect("2026-08-22","tokyo",["amedas"])
                 self.assertEqual(second["sources"][0]["status"],"cached")
                 self.assertEqual(len(second["sources"]),2)
-                third=collect.collect("2026-08-22","tokyo",["amedas"],True)
+                with patch.object(collect,"build_archive_index",lambda:None): third=collect.collect("2026-08-22","tokyo",["amedas"],True)
                 self.assertEqual(third["sources"][0]["status"],"success")
                 self.assertEqual(len(third["sources"]),2)
     def test_location_airport_mapping_is_consistent(self):
@@ -64,29 +66,53 @@ class PipelineTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             out=Path(temporary); manifest=collect.empty_manifest("2026-08-23",collect.locations()[12],[])
             collect.write_json(out/"manifest.json",manifest)
-            with patch.object(generate_llm_analysis,"snapshot_dir",lambda *_:out),patch.dict(generate_llm_analysis.os.environ,{},clear=True):
+            (out/"llm-analysis.md").write_text("old"); collect.write_json(out/"llm-analysis.json",{"model":"old"})
+            with patch.object(generate_llm_analysis,"snapshot_dir",lambda *_:out),patch.object(generate_llm_analysis,"build_archive_index",lambda:None),patch.dict(generate_llm_analysis.os.environ,{},clear=True):
                 self.assertFalse(generate_llm_analysis.generate("2026-08-23","tokyo"))
             saved=json.loads((out/"manifest.json").read_text())
             self.assertEqual(saved["llm"]["status"],"skipped")
+            self.assertEqual((out/"llm-analysis.md").read_text(),"old")
+            self.assertTrue((out/"llm-analysis.json").is_file())
     def test_gemini_falls_back_from_unavailable_configured_model(self):
         with tempfile.TemporaryDirectory() as temporary:
             out=Path(temporary); manifest=collect.empty_manifest("2026-08-23",collect.locations()[12],[])
             collect.write_json(out/"manifest.json",manifest)
+            calls=[]
             def fake_request(path,_key,body=None):
                 if path=="/models":
                     return {"models":[
                         {"name":"models/gemini-2.5-flash","modelStatus":"STABLE","supportedGenerationMethods":["generateContent"]},
-                        {"name":"models/gemini-3.6-flash","modelStatus":"STABLE","supportedGenerationMethods":["generateContent"]}]}
+                        {"name":"models/gemini-3.6-flash","modelStatus":"STABLE","supportedGenerationMethods":["generateContent"]},
+                        {"name":"models/gemini-9-pro","modelStatus":"STABLE","supportedGenerationMethods":["generateContent"]}]}
+                calls.append((path,body))
                 if "gemini-2.5-flash" in path: raise RuntimeError("HTTP 404 retired")
                 return {"candidates":[{"content":{"parts":[{"text":"# 解説"}]}}]}
-            with patch.object(generate_llm_analysis,"snapshot_dir",lambda *_:out),patch.object(generate_llm_analysis,"request_json",fake_request),patch.dict(generate_llm_analysis.os.environ,{"GEMINI_API_KEY":"test-only"},clear=True):
+            with patch.object(generate_llm_analysis,"snapshot_dir",lambda *_:out),patch.object(generate_llm_analysis,"request_json",fake_request),patch.object(generate_llm_analysis,"build_archive_index",lambda:None),patch.dict(generate_llm_analysis.os.environ,{"GEMINI_API_KEY":"test-only"},clear=True):
                 self.assertTrue(generate_llm_analysis.generate("2026-08-23","tokyo","gemini-2.5-flash"))
             saved=json.loads((out/"manifest.json").read_text())
             self.assertEqual(saved["llm"]["model"],"gemini-3.6-flash")
             self.assertTrue(saved["llm"]["attempts"])
+            metadata=json.loads((out/"llm-analysis.json").read_text())
+            self.assertEqual(metadata["model"],"gemini-3.6-flash"); self.assertEqual(metadata["markdown_path"],"llm-analysis.md")
+            self.assertFalse(any("pro" in path for path,_ in calls))
+            prompt=next(body for path,body in calls if "3.6-flash" in path)["contents"][0]["parts"][0]["text"]
+            for heading in ("現在の概況","高気圧・低気圧の配置","前線・台風・暖気・寒気","850hPa・500hPaの特徴","数値予報資料の読み取り","航空気象への影響","明日にかけての変化","不確実性と確認点"):
+                self.assertIn(heading,prompt)
+    def test_archive_index_summarizes_snapshots(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary)/"snapshots"; target=root/"2026-08-24"/"tokyo"; target.mkdir(parents=True)
+            manifest=collect.empty_manifest("2026-08-24",collect.locations()[12],["weather-map"],"scheduled")
+            manifest["sources"]=[{"id":"weather-map","status":"success"}]; manifest["llm"]["status"]="success"
+            collect.write_json(target/"manifest.json",manifest); (target/"llm-analysis.md").write_text("notes")
+            output=Path(temporary)/"archive_index.json"; result=common.build_archive_index(root,output)
+            item=result["snapshots"][0]
+            self.assertEqual(item["collection_mode"],"scheduled"); self.assertEqual(item["sources"],["weather-map"]); self.assertTrue(item["llm_analysis"])
+            self.assertEqual(json.loads(output.read_text())["schema_version"],1)
     def test_workflow_schedules_collection_and_gemini(self):
         workflow=(ROOT/".github/workflows/build-weather.yml").read_text()
         self.assertIn('cron: "0 22 * * *"',workflow)
+        self.assertIn('collection_mode=scheduled',workflow); self.assertIn('--collection-mode "$COLLECTION_MODE"',workflow)
+        self.assertIn('data/archive_index.json',workflow)
         self.assertLess(workflow.index("scripts/collect.py"),workflow.index("scripts/generate_llm_analysis.py"))
         self.assertLess(workflow.index("scripts/generate_llm_analysis.py"),workflow.index("scripts/build_static.py"))
     def test_worker_trigger_ui_contract_and_security(self):
@@ -111,5 +137,7 @@ class PipelineTests(unittest.TestCase):
         self.assertIn("資料を集めて、",html)
         self.assertIn('id="windy-embed"',html)
         self.assertIn('id="toggle-windy"',html)
+        self.assertIn('id="archive-history"',html)
+        self.assertIn("renderArchiveHistory",script); self.assertIn("自動取得",script); self.assertIn("Gemini解説あり",script)
         self.assertIn(".reading-guides {\n  display: block",(ROOT/"web/legacy-ui.css").read_text())
 if __name__=="__main__": unittest.main()

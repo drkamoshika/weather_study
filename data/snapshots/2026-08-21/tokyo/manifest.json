@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "target_date": "2026-08-21",
   "location": {
     "id": "tokyo",
@@ -498,6 +498,15 @@
     "model": "gemini-flash-lite-latest",
     "text_only_fallback": false,
     "attempts": [],
-    "error": null
-  }
+    "error": null,
+    "generated_at": "2026-08-23T18:21:40+09:00",
+    "input_sources": [
+      "weather-map",
+      "asia-analysis"
+    ],
+    "markdown_path": "llm-analysis.md",
+    "metadata_path": "llm-analysis.json"
+  },
+  "collection_mode": "manual",
+  "collector_version": "legacy-migration"
 }

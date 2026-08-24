@@ -23,15 +23,16 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y poppler-utils
       - name: Normalize inputs
         id: inputs
-        env: {REQUESTED_DATE: "${{ inputs.date }}", REQUESTED_LOCATION: "${{ inputs.location }}", REQUESTED_SOURCES: "${{ inputs.sources }}"}
+        env: {REQUESTED_DATE: "${{ inputs.date }}", REQUESTED_LOCATION: "${{ inputs.location }}", REQUESTED_SOURCES: "${{ inputs.sources }}", EVENT_NAME: "${{ github.event_name }}"}
         run: |
           if [ -n "$REQUESTED_DATE" ]; then echo "target_date=$REQUESTED_DATE" >> "$GITHUB_OUTPUT"; else echo "target_date=$(TZ=Asia/Tokyo date +%F)" >> "$GITHUB_OUTPUT"; fi
           if [ -n "$REQUESTED_LOCATION" ]; then echo "location_id=$REQUESTED_LOCATION" >> "$GITHUB_OUTPUT"; else echo "location_id=tokyo" >> "$GITHUB_OUTPUT"; fi
           if [ -n "$REQUESTED_SOURCES" ]; then echo "source_ids=$REQUESTED_SOURCES" >> "$GITHUB_OUTPUT"; else echo "source_ids=all" >> "$GITHUB_OUTPUT"; fi
+          if [ "$EVENT_NAME" = "schedule" ]; then echo "collection_mode=scheduled" >> "$GITHUB_OUTPUT"; else echo "collection_mode=manual" >> "$GITHUB_OUTPUT"; fi
       - name: Collect snapshot
-        env: {TARGET_DATE: "${{ steps.inputs.outputs.target_date }}", LOCATION_ID: "${{ steps.inputs.outputs.location_id }}", SOURCE_IDS: "${{ steps.inputs.outputs.source_ids }}", FORCE: "${{ inputs.force }}"}
+        env: {TARGET_DATE: "${{ steps.inputs.outputs.target_date }}", LOCATION_ID: "${{ steps.inputs.outputs.location_id }}", SOURCE_IDS: "${{ steps.inputs.outputs.source_ids }}", COLLECTION_MODE: "${{ steps.inputs.outputs.collection_mode }}", FORCE: "${{ inputs.force }}"}
         run: |
-          arguments=(--date "$TARGET_DATE" --location "$LOCATION_ID" --sources "$SOURCE_IDS")
+          arguments=(--date "$TARGET_DATE" --location "$LOCATION_ID" --sources "$SOURCE_IDS" --collection-mode "$COLLECTION_MODE")
           if [ "$FORCE" = "true" ]; then arguments+=(--force); fi
           python3 scripts/collect.py "${arguments[@]}"
       - name: Generate Gemini study notes
@@ -42,7 +43,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "data/snapshots/$TARGET_DATE/$LOCATION_ID"
+          git add "data/snapshots/$TARGET_DATE/$LOCATION_ID" data/archive_index.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "data: update weather snapshot $TARGET_DATE $LOCATION_ID"
           git pull --rebase

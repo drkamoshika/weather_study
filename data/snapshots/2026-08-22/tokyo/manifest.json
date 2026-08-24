@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "target_date": "2026-08-22",
   "location": {
     "id": "tokyo",
@@ -462,6 +462,34 @@
     "model": "gemini-flash-lite-latest",
     "text_only_fallback": false,
     "attempts": [],
-    "error": null
-  }
+    "error": null,
+    "generated_at": "2026-08-23T00:50:57+09:00",
+    "input_sources": [
+      "amedas",
+      "weather-map",
+      "asia-analysis",
+      "asia-forecast24",
+      "asia-forecast48",
+      "upper-850",
+      "upper-500",
+      "numeric",
+      "numeric-week",
+      "numeric-2week",
+      "numeric-month",
+      "forecast",
+      "briefing-short",
+      "briefing-week",
+      "past-observation-text",
+      "aviation:fbjp",
+      "aviation:low_level",
+      "aviation:low_level_detail",
+      "aviation:taf",
+      "aviation:fbjp12",
+      "aviation:sigmet"
+    ],
+    "markdown_path": "llm-analysis.md",
+    "metadata_path": "llm-analysis.json"
+  },
+  "collection_mode": "manual",
+  "collector_version": "legacy-migration"
 }

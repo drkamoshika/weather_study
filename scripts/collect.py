@@ -19,7 +19,7 @@ import urllib.request
 from datetime import datetime
 from pathlib import Path
 
-from common import JST, empty_manifest, locations, now, read_json, safe_source_id, sha256, snapshot_dir, sources, write_json
+from common import JST, build_archive_index, empty_manifest, locations, now, read_json, safe_source_id, sha256, snapshot_dir, sources, write_json
 
 USER_AGENT = "personal-weather-study-static/1.0 (+GitHub Actions)"
 
@@ -131,7 +131,7 @@ def collect_one(definition: dict, target_date: str, location: dict, out: Path) -
         entry["local_path"]="assets/"+name; entry["mime_type"]=mimetypes.guess_type(name)[0] or "application/octet-stream"; entry["content_hash"]=sha256(path)
     return entry
 
-def collect(target_date: str, location_id: str, requested: list[str], force: bool=False) -> dict:
+def collect(target_date: str, location_id: str, requested: list[str], force: bool=False, collection_mode: str="manual") -> dict:
     location_map={x["id"]:x for x in locations()}; definitions={x["id"]:x for x in sources()}
     if location_id not in location_map: raise ValueError("未知のlocationです: "+location_id)
     unknown=[x for x in requested if x not in definitions]
@@ -139,7 +139,7 @@ def collect(target_date: str, location_id: str, requested: list[str], force: boo
     out=snapshot_dir(target_date,location_id); old=read_json(out/"manifest.json") if (out/"manifest.json").exists() else None
     old_map={x["id"]:x for x in (old or {}).get("sources",[])}
     requested_union=list(dict.fromkeys((old or {}).get("requested_sources",list(old_map)) + requested))
-    manifest=empty_manifest(target_date,location_map[location_id],requested_union)
+    manifest=empty_manifest(target_date,location_map[location_id],requested_union,collection_mode)
     if old and old.get("llm"): manifest["llm"]=old["llm"]
     changed=False
     for source_id in requested:
@@ -155,16 +155,17 @@ def collect(target_date: str, location_id: str, requested: list[str], force: boo
             print(f"warning: {source_id}: {type(error).__name__}: {error}")
     manifest["sources"].extend(entry for source_id,entry in old_map.items() if source_id not in requested)
     if changed:
-        (out/"llm-analysis.md").unlink(missing_ok=True)
-        manifest["llm"]={"status":"not_requested","model":None,"text_only_fallback":False,"error":None}
-    write_json(out/"manifest.json",manifest); return manifest
+        manifest["llm"]={"status":"stale" if (out/"llm-analysis.md").exists() else "not_requested","model":None,"text_only_fallback":False,"error":None}
+    elif old:
+        manifest["generated_at"]=old.get("generated_at",manifest["generated_at"])
+    write_json(out/"manifest.json",manifest); build_archive_index(); return manifest
 
 def main() -> None:
     parser=argparse.ArgumentParser(description="選択資料を取得して静的snapshotに保存します。")
-    parser.add_argument("--date",default="",help="空欄はJSTの今日"); parser.add_argument("--location",default="tokyo"); parser.add_argument("--sources",default="all",help="comma-separated IDs, standard, all（空欄はall）"); parser.add_argument("--force",action="store_true")
+    parser.add_argument("--date",default="",help="空欄はJSTの今日"); parser.add_argument("--location",default="tokyo"); parser.add_argument("--sources",default="all",help="comma-separated IDs, standard, all（空欄はall）"); parser.add_argument("--force",action="store_true"); parser.add_argument("--collection-mode",choices=("manual","scheduled"),default="manual")
     args=parser.parse_args(); args.date=args.date.strip() or datetime.now(JST).date().isoformat(); args.location=args.location.strip() or "tokyo"; args.sources=args.sources.strip() or "all"; datetime.strptime(args.date,"%Y-%m-%d")
     all_ids=[x["id"] for x in sources()]; standard=["amedas","weather-map","asia-analysis","asia-forecast24","upper-850","upper-500","numeric","forecast","briefing-short","briefing-week","past-observation-text","aviation:fbjp","aviation:low_level","aviation:taf"]
     requested=all_ids if args.sources=="all" else standard if args.sources=="standard" else [x.strip() for x in args.sources.split(",") if x.strip()]
-    result=collect(args.date,args.location,requested,args.force); counts={status:sum(x["status"]==status for x in result["sources"]) for status in ("success","cached","unavailable","failed")}; print("snapshot:",result["target_date"],result["location"]["id"],counts)
+    result=collect(args.date,args.location,requested,args.force,args.collection_mode); counts={status:sum(x["status"]==status for x in result["sources"]) for status in ("success","cached","unavailable","failed")}; print("snapshot:",result["target_date"],result["location"]["id"],result["collection_mode"],counts)
 
 if __name__=="__main__": main()

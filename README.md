@@ -7,14 +7,16 @@
 ## Architecture
 
 ```text
-GitHub Actions（手動: date / location / sources / force）
+GitHub Actions（毎日07:00 JST + 手動: date / location / sources / force）
   ├─ scripts/collect.py           公式資料を取得
   │    └─ data/snapshots/YYYY-MM-DD/location-id/
-  │         ├─ manifest.json      出典、時刻、hash、status、error
+  │         ├─ manifest.json      v2: 取得区分、出典、時刻、hash、status、error
   │         ├─ data/*.json        AMeDAS、予報、公式テキスト
   │         └─ assets/*           天気図・航空気象図
   ├─ scripts/generate_llm_analysis.py
-  │    └─ llm-analysis.md         snapshot生成時の学習用解説
+  │    ├─ llm-analysis.md         snapshot生成時の学習用解説
+  │    └─ llm-analysis.json       モデル、生成時刻、入力資料、Markdownパス
+  ├─ data/archive_index.json      全snapshotの取得履歴索引
   └─ scripts/build_static.py
        └─ dist/ → GitHub Pages
 ```
@@ -52,6 +54,8 @@ python3 -m http.server 8000
 
 日付、地点、資料種別、全選択・全解除、画像拡大・再クリックズーム、AMeDAS表・地図、予報、航空資料、公式実況テキスト、生成済み Gemini 解説を利用できます。`?date=2026-08-22&location=tokyo` のような URL から表示を復元できます。
 
+「取得履歴」には日付、地点、自動取得／手動取得、保存資料数、Gemini解説の有無を表示します。各行を選ぶと、そのsnapshotを直接開けます。
+
 ## 3. ローカルで新規データを取得する
 
 標準資料一式:
@@ -76,6 +80,7 @@ python3 scripts/collect.py \
 - `all`: `config/sources.json` の全資料
 - カンマ区切り: 指定した source ID だけ
 - `--force`: 成功済みキャッシュも再取得。省略時は同じ日付・地点・sourceを再利用
+- `--collection-mode manual|scheduled`: 取得区分。ローカル実行の既定値は `manual`
 
 地点は `config/locations.json`、空港 ICAO は `config/airports.json`、資料は `config/sources.json` で管理します。TAF は `location → airport_icao → URL → 保存ファイル → manifest → 表示` が同じ地点になる構成です。全国共通の航空図は地点非依存です。
 
@@ -104,7 +109,11 @@ python3 scripts/generate_llm_analysis.py --date 2026-08-22 --location tokyo
 python3 scripts/build_static.py
 ```
 
-モデル一覧から `generateContent` 対応の Gemini モデルだけを使い、画像専用・TTS・agent系、廃止・非推奨状態のモデルを除外します。`GEMINI_MODEL` で指定したモデルが利用不能・廃止済みでも、一覧内の安定版Flashモデルを順に試します。画像入力が使えない場合は同じモデルのtext-only、さらに失敗した場合は次のモデルへフォールバックし、試行モデル、HTTPエラー、fallback有無を秘密値なしでmanifestに残します。リアルタイムチャットはありません。
+モデル方針は `config/gemini.json` で管理します。2026年8月時点の公式モデル一覧に合わせ、既定は `gemini-3.7-flash`、既知のfallbackは3.6/3.5系Flashです。ただし実行時にはAPIのモデル一覧を照合し、利用可能な新しい安定版Flashを優先します。Pro、画像生成、TTS、Live、廃止・非推奨モデルは候補にしません。`GEMINI_MODEL` はFlashモデルだけ上書き候補にできます。
+
+生成結果は `llm-analysis.md` と `llm-analysis.json` の両方へ保存します。JSONには実際のモデル、生成時刻、入力に使ったsource ID、Markdownパスを記録します。解説には概況、気圧配置、前線等、850/500hPa、数値予報、航空気象、翌日の変化、不確実性の各節を必須にしています。画像入力が使えない場合は同じモデルのtext-only、さらに失敗した場合は次のFlashへフォールバックします。
+
+API key未設定または生成失敗でも収集・commit・Pages公開は止まりません。manifestの `llm.status` を `skipped` / `failed` として残し、過去に保存済みのMarkdown/JSONを削除しません。
 
 ## 5. GitHub Actions と Pages
 
@@ -121,7 +130,7 @@ python3 scripts/build_static.py
 
 したがって入力を何も変更せず **Run workflow** を押すだけで、「日本時間の今日・東京・全資料」を取得します。
 
-workflow は checkout、Python、Poppler、collector、Gemini、snapshot の commit/push、static build、Pages artifact upload、deploy の順です。同時実行は直列化し、pushイベントでは起動しないためsnapshotのpushで再実行ループしません。`contents: write`、`pages: write`、`id-token: write` が必要です。
+workflow は checkout、Python、Poppler、collector、Gemini、snapshotとarchive indexのcommit/push、static build、Pages artifact upload、deploy の順です。同時実行は直列化し、pushイベントでは起動しないためsnapshotのpushで再実行ループしません。変更がない場合はcommit/pushを省略します。`contents: write`、`pages: write`、`id-token: write` が必要です。
 
 手動実行に加えて、毎日 **日本時間 7:00** に定期実行します。GitHub Actions の cron はUTCのため、workflowには `0 22 * * *`（前日22:00 UTC）を設定しています。定期実行時も「当日・東京・全資料」を取得し、`GEMINI_API_KEY` が設定済みなら同じrunの中でGemini解説を生成してからPagesを更新します。GitHub側の混雑により開始が遅れる場合があります。
 
@@ -157,10 +166,19 @@ data/snapshots/2026-08-22/tokyo/
 ├── assets/
 │   ├── weather-map.png
 │   └── aviation-taf.png
-└── llm-analysis.md
+├── llm-analysis.md
+└── llm-analysis.json
 ```
 
-manifest は `schema_version`、対象日、地点（緯度経度・空港）、要求 source、取得元 URL、local/data path、MIME type、取得・発表・有効時刻、SHA-256、cache hit、status、error、Gemini利用有無を持ちます。確実に判定できない時刻は `null` です。
+manifest v2 は `schema_version`、対象日、`collection_mode`（`scheduled` / `manual`）、生成時刻、collector版、地点（緯度経度・空港）、要求 source、取得元 URL、local/data path、MIME type、取得・発表・有効時刻、SHA-256、cache hit、status、error、Gemini利用有無を持ちます。確実に判定できない時刻は `null` です。
+
+`data/archive_index.json` はmanifestから再生成できる派生索引です。次のコマンドで安全に作り直せます。snapshot、画像、LLM成果物、manifestは削除しません。
+
+```sh
+python3 scripts/build_archive_index.py
+```
+
+旧manifestだけをv2へ更新する場合は `python3 scripts/upgrade_snapshot_metadata.py` を使います。資料ファイルやLLM成果物には触れません。
 
 status:
 
@@ -176,7 +194,7 @@ status:
 ```sh
 python3 -m unittest discover -s tests -v
 python3 scripts/build_static.py
-rg '/api/' web dist
+rg '/api/' web dist/*.js dist/*.html
 ```
 
 最後の `rg` が何も表示しなければ静的 frontend に `/api/*` 依存はありません。
@@ -189,6 +207,7 @@ rg '/api/' web dist
 - Leaflet 地図タイル、予報アイコン、外部リンクは閲覧時のネット接続が必要です。保存済み図と JSON は相対パスです。
 - 民間予報サイトの画面は保存・再配布しません。
 - 旧版は `python3 server.py` で起動できますが、新しい `dist/` には不要です。
+- snapshot配下の履歴ファイルは自動削除しません。同じ日付・地点を再取得しても既存のLLM成果物は保持し、再生成前はmanifestを `stale` として扱います。
 
 ## 現状監査の記録
 

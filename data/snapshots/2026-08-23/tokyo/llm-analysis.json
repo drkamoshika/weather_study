@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "model": "gemini-flash-lite-latest",
+  "generated_at": "2026-08-23T17:24:15+09:00",
+  "input_sources": [
+    "amedas",
+    "weather-map",
+    "asia-analysis",
+    "asia-forecast24",
+    "asia-forecast48",
+    "forecast",
+    "past-observation-text"
+  ],
+  "markdown_path": "llm-analysis.md",
+  "text_only_fallback": false
+}

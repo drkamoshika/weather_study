@@ -7,6 +7,34 @@
 .reading-guides article:last-child {
   margin-bottom: 0;
 }
+.archive-history {
+  display: grid;
+  gap: 8px;
+}
+.archive-row {
+  display: grid;
+  grid-template-columns: 130px minmax(180px, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 16px;
+  color: var(--ink);
+  text-decoration: none;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+.archive-row:hover { border-color: var(--blue); }
+.archive-row time { font: 700 14px monospace; }
+.archive-row small { display: block; color: var(--muted); }
+.archive-badges { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+.archive-badges i {
+  padding: 3px 8px;
+  color: var(--muted);
+  font: normal 700 11px monospace;
+  background: #eef0ed;
+  border-radius: 999px;
+}
+.archive-badges .mode-scheduled { color: var(--blue); background: #e6f0ef; }
+.archive-badges .has-llm { color: #91462f; background: #fae8e2; }
 .windy-frame {
   position: relative;
   width: 100%;
@@ -41,5 +69,7 @@
   font-size: 12px;
 }
 @media (max-width: 650px) {
+  .archive-row { grid-template-columns: 1fr; gap: 5px; }
+  .archive-badges { justify-content: flex-start; }
   .windy-frame { aspect-ratio: 1 / 1; }
 }

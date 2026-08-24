@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "target_date": "2026-08-15",
   "location": {
     "id": "hokkaido",
@@ -69,5 +69,7 @@
     "source": "data/state.json",
     "migrated_at": "2026-08-23T00:03:30+09:00",
     "target_date_inferred": false
-  }
+  },
+  "collection_mode": "manual",
+  "collector_version": "legacy-migration"
 }

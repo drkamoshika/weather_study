@@ -6,12 +6,13 @@ import argparse
 import shutil
 from pathlib import Path
 
-from common import ROOT, SNAPSHOTS, locations, read_json, sources, write_json
+from common import ARCHIVE_INDEX, ROOT, SNAPSHOTS, build_archive_index, locations, read_json, sources, write_json
 
 WEB = ROOT / "web"
 DIST = ROOT / "dist"
 
 def build(output: Path = DIST) -> int:
+    archive = build_archive_index()
     if output.exists():
         shutil.rmtree(output)
     shutil.copytree(WEB, output)
@@ -24,10 +25,11 @@ def build(output: Path = DIST) -> int:
             entries.append({"date": manifest.get("target_date"), "location": manifest.get("location"),
                             "manifest": "snapshots/" + relative,
                             "statuses": {item["id"]: item["status"] for item in manifest.get("sources", [])}})
+    shutil.copy2(ARCHIVE_INDEX, output / "archive_index.json")
     entries.sort(key=lambda item: (item["date"], item["location"]["id"]), reverse=True)
     public_sources = [{key: source.get(key) for key in ("id", "name", "category", "abbreviation", "view")}
                       for source in sources()]
-    write_json(output / "index.json", {"schema_version": 1, "snapshots": entries,
+    write_json(output / "index.json", {"schema_version": 2, "snapshots": entries, "archive": archive["snapshots"],
                                         "locations": locations(), "sources": public_sources,
                                         "glossary": read_json(ROOT / "config" / "glossary.json")})
     (output / ".nojekyll").touch()
