@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24T12:21:42+09:00",
+  "generated_at": "2026-08-24T12:55:10+09:00",
   "snapshots": [
     {
       "date": "2026-08-24",
@@ -15,7 +15,7 @@
         "airport_name": "東京国際"
       },
       "collection_mode": "manual",
-      "generated_at": "2026-08-24T12:21:42+09:00",
+      "generated_at": "2026-08-24T12:55:10+09:00",
       "sources": [
         "amedas",
         "weather-map",

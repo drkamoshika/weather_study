@@ -1,6 +1,6 @@
 {
   "source_id": "forecast",
-  "collected_at": "2026-08-24T07:29:49+09:00",
+  "collected_at": "2026-08-24T12:55:25+09:00",
   "location": {
     "id": "tokyo",
     "prefecture": "東京都",
@@ -12,18 +12,18 @@
     "airport_name": "東京国際"
   },
   "title": "東京都 東京 の天気",
-  "published_at": "2026/08/24 05:00:00",
+  "published_at": "2026/08/24 11:00:00",
   "official_url": "https://www.jma.go.jp/bosai/forecast/#area_type=offices&area_code=130000",
   "headline": "",
   "forecasts": [
     {
       "date": "2026-08-24",
       "dateLabel": "今日",
-      "telop": "晴のち曇",
+      "telop": "晴時々曇",
       "detail": {
-        "weather": "晴れ　夕方　から　くもり　所により　昼過ぎ　から　夜のはじめ頃　雨　で　雷を伴う",
+        "weather": "晴れ　時々　くもり　所により　昼過ぎ　から　夜のはじめ頃　雨　で　雷を伴う",
         "wind": "南の風　２３区西部　では　南の風　やや強く",
-        "wave": "０．５メートル　後　１メートル"
+        "wave": "１メートル　後　０．５メートル"
       },
       "temperature": {
         "min": {
@@ -37,13 +37,13 @@
       },
       "chanceOfRain": {
         "T00_06": "--%",
-        "T06_12": "0%",
+        "T06_12": "--%",
         "T12_18": "20%",
         "T18_24": "20%"
       },
       "image": {
-        "title": "晴のち曇",
-        "url": "https://www.jma.go.jp/bosai/forecast/img/110.svg",
+        "title": "晴時々曇",
+        "url": "https://www.jma.go.jp/bosai/forecast/img/101.svg",
         "width": 80,
         "height": 60
       }
@@ -83,16 +83,16 @@
     {
       "date": "2026-08-26",
       "dateLabel": "明後日",
-      "telop": "曇時々晴",
+      "telop": "曇り",
       "detail": {
-        "weather": null,
-        "wind": null,
-        "wave": null
+        "weather": "くもり",
+        "wind": "南東の風　後　南の風",
+        "wave": "０．５メートル"
       },
       "temperature": {
         "min": {
-          "celsius": "25",
-          "fahrenheit": "77"
+          "celsius": "26",
+          "fahrenheit": "78.8"
         },
         "max": {
           "celsius": "35",
@@ -100,14 +100,14 @@
         }
       },
       "chanceOfRain": {
-        "T00_06": "30%",
-        "T06_12": "30%",
-        "T12_18": "30%",
-        "T18_24": "30%"
+        "T00_06": "40%",
+        "T06_12": "40%",
+        "T12_18": "40%",
+        "T18_24": "40%"
       },
       "image": {
-        "title": "曇時々晴",
-        "url": "https://www.jma.go.jp/bosai/forecast/img/201.svg",
+        "title": "曇り",
+        "url": "https://www.jma.go.jp/bosai/forecast/img/200.svg",
         "width": 80,
         "height": 60
       }
