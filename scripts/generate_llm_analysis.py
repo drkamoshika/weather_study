@@ -56,17 +56,19 @@ def choose_models(api_key: str, requested: str | None) -> list[str]:
 
 def evidence(manifest: dict, out) -> tuple[str,list[dict],list[str]]:
     text_parts=[f"対象日: {manifest['target_date']}",f"地点: {manifest['location']['prefecture']} {manifest['location']['city']}"]
-    images=[]; used=[]
+    images=[]; used=[]; image_bytes=0
     for entry in manifest.get("sources",[]):
         if entry.get("status") not in ("success","cached"): continue
         text_parts.append(f"- {entry['name']}（取得: {entry.get('fetched_at') or '不明'}）")
         if entry.get("data_path"):
             value=read_json(out/entry["data_path"]); compact=json.dumps(value,ensure_ascii=False)
             text_parts.append(compact[:8000]); used.append(entry["id"])
-        elif entry.get("local_path") and len(images)<4:
+        elif entry.get("local_path"):
             path=out/entry["local_path"]
-            if path.exists() and path.stat().st_size<=900_000:
-                images.append({"inline_data":{"mime_type":entry.get("mime_type") or mimetypes.guess_type(path.name)[0] or "image/png","data":base64.b64encode(path.read_bytes()).decode("ascii")}}); used.append(entry["id"])
+            size=path.stat().st_size if path.exists() else 0
+            if path.exists() and size<=5_000_000 and image_bytes+size<=15_000_000:
+                images.append({"text":f"次の図は {entry['name']}（source_id: {entry['id']}）です。"})
+                images.append({"inline_data":{"mime_type":entry.get("mime_type") or mimetypes.guess_type(path.name)[0] or "image/png","data":base64.b64encode(path.read_bytes()).decode("ascii")}}); used.append(entry["id"]); image_bytes+=size
     return "\n".join(text_parts)[:30000],images,used
 
 def generate(target_date: str, location_id: str, requested_model: str | None = None) -> bool:
@@ -76,7 +78,15 @@ def generate(target_date: str, location_id: str, requested_model: str | None = N
     model=None; fallback=False; attempts=[]
     try:
         models=choose_models(key,requested_model or os.environ.get("GEMINI_MODEL")); text,images,used=evidence(manifest,out)
-        prompt="""あなたは気象学習の補助者です。次の取得済み資料だけを根拠に、事実・読み取り・不確実性を区別して日本語Markdownで解説してください。推測を断定せず、資料にない項目は「判断材料不足」と明記してください。公式予報ではないことを冒頭に明記し、防災判断は気象庁などの公式情報へ誘導してください。
+        prompt="""あなたは総観気象を解説する気象学習の補助者です。取得済みのすべての図・観測値・予報資料を相互に照合し、対象地点で現在の天気がなぜ生じているのかを、一つの総合的な説明として推論してください。
+
+重要な回答方針:
+- 資料を一枚ずつ順番に紹介・要約する回答は禁止です。
+- まず対象地点の現在の天気を簡潔に結論づけ、その後に「観測された現象 → 地上の気圧配置・前線 → 850hPaの気温と湿り → 500hPaの流れ・寒気やトラフ → 数値予報と航空資料」という因果関係を組み立ててください。
+- 同じ判断を支持する複数資料をまとめ、どの所見が結論の根拠になったかを本文中にsource_id付きで示してください。
+- 資料同士が一致しない場合は、その不一致と考えられる理由を説明してください。
+- 事実、図からの読み取り、推論、不確実性を明確に区別してください。推測を断定せず、資料にない項目は「判断材料不足」と明記してください。
+- 公式予報ではないことを冒頭に明記し、防災判断は気象庁などの公式情報へ誘導してください。
 
 次の見出しを、この順序ですべて含めてください。
 ## 現在の概況

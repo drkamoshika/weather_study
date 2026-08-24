@@ -10,6 +10,11 @@
 .archive-history {
   display: grid;
   gap: 8px;
+  max-height: 430px;
+  padding-right: 6px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
 }
 .archive-row {
   display: grid;
@@ -35,6 +40,7 @@
 }
 .archive-badges .mode-scheduled { color: var(--blue); background: #e6f0ef; }
 .archive-badges .has-llm { color: #91462f; background: #fae8e2; }
+.snapshot-filters { margin: -4px 0 24px; padding: 14px; background: rgba(255,255,255,.45); border: 1px solid var(--line); }
 .windy-frame {
   position: relative;
   width: 100%;

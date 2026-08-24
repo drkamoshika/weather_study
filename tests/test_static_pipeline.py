@@ -98,15 +98,26 @@ class PipelineTests(unittest.TestCase):
             prompt=next(body for path,body in calls if "3.6-flash" in path)["contents"][0]["parts"][0]["text"]
             for heading in ("現在の概況","高気圧・低気圧の配置","前線・台風・暖気・寒気","850hPa・500hPaの特徴","数値予報資料の読み取り","航空気象への影響","明日にかけての変化","不確実性と確認点"):
                 self.assertIn(heading,prompt)
+            self.assertIn("資料を一枚ずつ順番に紹介・要約する回答は禁止",prompt)
+            self.assertIn("因果関係を組み立ててください",prompt)
+    def test_gemini_evidence_uses_all_available_figures(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            out=Path(temporary); (out/"assets").mkdir()
+            manifest=collect.empty_manifest("2026-08-24",collect.locations()[12],[]); manifest["sources"]=[]
+            for index in range(6):
+                name=f"chart-{index}.png"; (out/"assets"/name).write_bytes(b"x"*950_000)
+                manifest["sources"].append({"id":f"chart-{index}","name":f"図{index}","status":"success","local_path":f"assets/{name}","mime_type":"image/png"})
+            _text,parts,used=generate_llm_analysis.evidence(manifest,out)
+            self.assertEqual(len(used),6); self.assertEqual(len(parts),12)
     def test_archive_index_summarizes_snapshots(self):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary)/"snapshots"; target=root/"2026-08-24"/"tokyo"; target.mkdir(parents=True)
             manifest=collect.empty_manifest("2026-08-24",collect.locations()[12],["weather-map"],"scheduled")
-            manifest["sources"]=[{"id":"weather-map","status":"success"}]; manifest["llm"]["status"]="success"
+            manifest["sources"]=[{"id":"weather-map","status":"success"}]; manifest["llm"].update({"status":"success","model":"gemini-3.7-flash"})
             collect.write_json(target/"manifest.json",manifest); (target/"llm-analysis.md").write_text("notes")
             output=Path(temporary)/"archive_index.json"; result=common.build_archive_index(root,output)
             item=result["snapshots"][0]
-            self.assertEqual(item["collection_mode"],"scheduled"); self.assertEqual(item["sources"],["weather-map"]); self.assertTrue(item["llm_analysis"])
+            self.assertEqual(item["collection_mode"],"scheduled"); self.assertEqual(item["sources"],["weather-map"]); self.assertTrue(item["llm_analysis"]); self.assertEqual(item["llm_model"],"gemini-3.7-flash")
             self.assertEqual(json.loads(output.read_text())["schema_version"],1)
     def test_workflow_schedules_collection_and_gemini(self):
         workflow=(ROOT/".github/workflows/build-weather.yml").read_text()
@@ -138,6 +149,9 @@ class PipelineTests(unittest.TestCase):
         self.assertIn('id="windy-embed"',html)
         self.assertIn('id="toggle-windy"',html)
         self.assertIn('id="archive-history"',html)
-        self.assertIn("renderArchiveHistory",script); self.assertIn("自動取得",script); self.assertIn("Gemini解説あり",script)
+        self.assertIn("renderArchiveHistory",script); self.assertIn("自動取得",script); self.assertIn("Gemini:",script)
+        self.assertNotIn("保存済み資料を見る",html)
+        self.assertIn('id="llm-model"',html); self.assertIn("manifest.llm?.model",script)
+        self.assertIn("max-height: 430px",(ROOT/"web/legacy-ui.css").read_text())
         self.assertIn(".reading-guides {\n  display: block",(ROOT/"web/legacy-ui.css").read_text())
 if __name__=="__main__": unittest.main()

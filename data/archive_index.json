@@ -41,6 +41,7 @@
       ],
       "source_count": 21,
       "llm_analysis": true,
+      "llm_model": "gemini-flash-lite-latest",
       "manifest": "snapshots/2026-08-24/tokyo/manifest.json"
     },
     {
@@ -82,6 +83,7 @@
       ],
       "source_count": 21,
       "llm_analysis": true,
+      "llm_model": "gemini-flash-lite-latest",
       "manifest": "snapshots/2026-08-23/tokyo/manifest.json"
     },
     {
@@ -123,6 +125,7 @@
       ],
       "source_count": 21,
       "llm_analysis": true,
+      "llm_model": "gemini-flash-lite-latest",
       "manifest": "snapshots/2026-08-22/tokyo/manifest.json"
     },
     {
@@ -145,6 +148,7 @@
       ],
       "source_count": 2,
       "llm_analysis": true,
+      "llm_model": "gemini-flash-lite-latest",
       "manifest": "snapshots/2026-08-21/tokyo/manifest.json"
     },
     {
@@ -186,6 +190,7 @@
       ],
       "source_count": 21,
       "llm_analysis": false,
+      "llm_model": null,
       "manifest": "snapshots/2026-08-16/tokyo/manifest.json"
     },
     {
@@ -208,6 +213,7 @@
       ],
       "source_count": 2,
       "llm_analysis": false,
+      "llm_model": null,
       "manifest": "snapshots/2026-08-15/tokyo/manifest.json"
     },
     {
@@ -230,6 +236,7 @@
       ],
       "source_count": 2,
       "llm_analysis": false,
+      "llm_model": null,
       "manifest": "snapshots/2026-08-15/hokkaido/manifest.json"
     },
     {
@@ -249,6 +256,7 @@
       "sources": [],
       "source_count": 0,
       "llm_analysis": true,
+      "llm_model": "gemini-flash-lite-latest",
       "manifest": "snapshots/2026-08-14/tokyo/manifest.json"
     }
   ]

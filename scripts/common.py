@@ -72,6 +72,7 @@ def build_archive_index(snapshots: Path = SNAPSHOTS, output: Path = ARCHIVE_INDE
                 "sources": successful,
                 "source_count": len(successful),
                 "llm_analysis": manifest.get("llm", {}).get("status") == "success" and llm_path.is_file(),
+                "llm_model": manifest.get("llm", {}).get("model"),
                 "manifest": f"snapshots/{relative_root}/manifest.json",
             })
     entries.sort(key=lambda item: (item["date"] or "", item["location"].get("id", "")), reverse=True)
