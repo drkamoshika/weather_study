@@ -1,0 +1,116 @@
+{
+  "source_id": "forecast",
+  "collected_at": "2026-08-25T07:35:07+09:00",
+  "location": {
+    "id": "tokyo",
+    "prefecture": "東京都",
+    "city": "東京",
+    "latitude": 35.6762,
+    "longitude": 139.6503,
+    "forecast_area_code": "130010",
+    "airport_icao": "RJTT",
+    "airport_name": "東京国際"
+  },
+  "title": "東京都 東京 の天気",
+  "published_at": "2026/08/25 05:00:00",
+  "official_url": "https://www.jma.go.jp/bosai/forecast/#area_type=offices&area_code=130000",
+  "headline": "",
+  "forecasts": [
+    {
+      "date": "2026-08-25",
+      "dateLabel": "今日",
+      "telop": "晴のち時々曇",
+      "detail": {
+        "weather": "晴れ　昼過ぎ　から　時々　くもり　所により　雨　で　雷を伴う",
+        "wind": "南の風　２３区西部　では　南の風　やや強く",
+        "wave": "０．５メートル　後　１メートル"
+      },
+      "temperature": {
+        "min": {
+          "celsius": null,
+          "fahrenheit": null
+        },
+        "max": {
+          "celsius": "35",
+          "fahrenheit": "95"
+        }
+      },
+      "chanceOfRain": {
+        "T00_06": "--%",
+        "T06_12": "10%",
+        "T12_18": "20%",
+        "T18_24": "20%"
+      },
+      "image": {
+        "title": "晴のち時々曇",
+        "url": "https://www.jma.go.jp/bosai/forecast/img/110.svg",
+        "width": 80,
+        "height": 60
+      }
+    },
+    {
+      "date": "2026-08-26",
+      "dateLabel": "明日",
+      "telop": "晴のち曇",
+      "detail": {
+        "weather": "晴れ　夕方　から　くもり　多摩西部　では　夕方　から　夜のはじめ頃　雨　で　雷を伴い　激しく　降る",
+        "wind": "南の風",
+        "wave": "０．５メートル"
+      },
+      "temperature": {
+        "min": {
+          "celsius": "26",
+          "fahrenheit": "78.8"
+        },
+        "max": {
+          "celsius": "35",
+          "fahrenheit": "95"
+        }
+      },
+      "chanceOfRain": {
+        "T00_06": "0%",
+        "T06_12": "10%",
+        "T12_18": "20%",
+        "T18_24": "30%"
+      },
+      "image": {
+        "title": "晴のち曇",
+        "url": "https://www.jma.go.jp/bosai/forecast/img/110.svg",
+        "width": 80,
+        "height": 60
+      }
+    },
+    {
+      "date": "2026-08-27",
+      "dateLabel": "明後日",
+      "telop": "曇一時雨",
+      "detail": {
+        "weather": null,
+        "wind": null,
+        "wave": null
+      },
+      "temperature": {
+        "min": {
+          "celsius": "25",
+          "fahrenheit": "77"
+        },
+        "max": {
+          "celsius": "33",
+          "fahrenheit": "91.4"
+        }
+      },
+      "chanceOfRain": {
+        "T00_06": "60%",
+        "T06_12": "60%",
+        "T12_18": "60%",
+        "T18_24": "60%"
+      },
+      "image": {
+        "title": "曇一時雨",
+        "url": "https://www.jma.go.jp/bosai/forecast/img/202.svg",
+        "width": 80,
+        "height": 60
+      }
+    }
+  ]
+}
