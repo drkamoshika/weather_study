@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "model": "gemini-flash-lite-latest",
-  "generated_at": "2026-08-25T07:35:36+09:00",
+  "generated_at": "2026-08-25T14:30:00+09:00",
   "input_sources": [
     "amedas",
     "weather-map",

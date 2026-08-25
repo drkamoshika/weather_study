@@ -14,7 +14,7 @@
         "airport_icao": "RJTT",
         "airport_name": "東京国際"
       },
-      "collection_mode": "scheduled",
+      "collection_mode": "manual",
       "generated_at": "2026-08-25T07:34:53+09:00",
       "sources": [
         "amedas",

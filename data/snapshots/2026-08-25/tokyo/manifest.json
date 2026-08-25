@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "target_date": "2026-08-25",
-  "collection_mode": "scheduled",
+  "collection_mode": "manual",
   "generated_at": "2026-08-25T07:34:53+09:00",
   "collector_version": "2.0.0",
   "location": {
@@ -52,8 +52,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "1ea7c79809247bc071412bcc5a8a1bb2d297d707a307cdc22255dada56fe7413",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -71,8 +71,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "cc6f15cabd76a1448b7f9ab7a6edcfc9a04f366d67d2d20ab918c494a04e5621",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -90,8 +90,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "3eb2b1dab504a82c4029e79e65aefb5ba1b0bcd5baacf0048da1d7ed9a74531f",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -109,8 +109,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "4b767208b489cfa12584e255cf47c1c090121e1604449e1ed6dbaeeb0ebd55a2",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -128,8 +128,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "5a824a84c2174e3cedae70ce79eb9b488fad69ea4840b259c9343a44a7d38d60",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -147,8 +147,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "91fe5f33c181d408b9c96cc18211f541ea734dfdf0bb6e2728be23698e5206da",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -166,8 +166,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "0f8989d5134e4108d630fa0372b43a35b72cbe61fd536e278677bea8deb1a466",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -185,8 +185,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "54a33b3bfacfcb49a323883229fdddd1f71edd39ade82090a607ae92ee2b73f7",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -204,8 +204,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "3cff6fadfdd7fe5caf21530f8d0d7ff90258aee17e9c4bd393b865eb1ab5cd4c",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -223,8 +223,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "aa4608cd4bfeabea52dd9f2d7eebd1e23f3178f84f8aeb2f0166ccf316b1416c",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -242,8 +242,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "af0cd5141366a47c862b2442c0ad9914531736c7d99d190938f9ec2660c5c9df",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -261,8 +261,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "ddc59fdc9a259cc23709274fbb8184d55b8074ddc2ed6125b9acbdb0c416617b",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -280,8 +280,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "00d13bd18920a092a1865b33f4358261baab15dbfc7ded0605da578e4b1667e0",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -299,8 +299,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "4423d373b1daeb689dad35ad50163eab93582594891cb679531950be6f30c023",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -318,8 +318,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "52101d1f8fc902239a12162405590b13f524eb5c0dcfe44dd3aa1a714bfff874",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -337,8 +337,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "d21265b3e0cf11da47e4c9ab60e3de66b2e06b582eed3408ad425dd5c883b536",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -356,8 +356,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "f967866a59d442d7fb5ae5199471cdbbfb1448983f9e9acc1593391f26cf6d61",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -375,8 +375,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "298d7b92792ada7ed73f6f5993b0b1abffbc53022fb7ee0537abfa586674dd87",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -394,8 +394,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "f39452260a3f3669084f5465e293eb11002a316f67bee50586a97415fa4af066",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -413,8 +413,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "8d76946c91c83bc3a2edce06bddceb8bae80a256ff14cab9cc68ec34e201f23a",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     },
@@ -432,8 +432,8 @@
       "valid_from": null,
       "valid_to": null,
       "content_hash": "bdc71dff6234a5692ee4d36363baef4b59ebbd18459fa086129004c26caddc9f",
-      "cache_hit": false,
-      "status": "success",
+      "cache_hit": true,
+      "status": "cached",
       "error": null,
       "used_by_llm": true
     }
@@ -441,7 +441,7 @@
   "llm": {
     "status": "success",
     "model": "gemini-flash-lite-latest",
-    "generated_at": "2026-08-25T07:35:36+09:00",
+    "generated_at": "2026-08-25T14:30:00+09:00",
     "input_sources": [
       "amedas",
       "weather-map",
