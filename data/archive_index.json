@@ -1,7 +1,49 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-27T12:03:01+09:00",
+  "generated_at": "2026-08-28T15:03:49+09:00",
   "snapshots": [
+    {
+      "date": "2026-08-28",
+      "location": {
+        "id": "tokyo",
+        "prefecture": "東京都",
+        "city": "東京",
+        "latitude": 35.6762,
+        "longitude": 139.6503,
+        "forecast_area_code": "130010",
+        "airport_icao": "RJTT",
+        "airport_name": "東京国際"
+      },
+      "collection_mode": "scheduled",
+      "generated_at": "2026-08-28T15:03:49+09:00",
+      "sources": [
+        "amedas",
+        "weather-map",
+        "asia-analysis",
+        "asia-forecast24",
+        "asia-forecast48",
+        "upper-850",
+        "upper-500",
+        "numeric",
+        "numeric-week",
+        "numeric-2week",
+        "numeric-month",
+        "forecast",
+        "briefing-short",
+        "briefing-week",
+        "past-observation-text",
+        "aviation:fbjp",
+        "aviation:low_level",
+        "aviation:low_level_detail",
+        "aviation:taf",
+        "aviation:fbjp12",
+        "aviation:sigmet"
+      ],
+      "source_count": 21,
+      "llm_analysis": false,
+      "llm_model": "gemini-flash-latest",
+      "manifest": "snapshots/2026-08-28/tokyo/manifest.json"
+    },
     {
       "date": "2026-08-27",
       "location": {
