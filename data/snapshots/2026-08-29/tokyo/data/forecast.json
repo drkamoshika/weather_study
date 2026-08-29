@@ -1,0 +1,116 @@
+{
+  "source_id": "forecast",
+  "collected_at": "2026-08-29T12:37:56+09:00",
+  "location": {
+    "id": "tokyo",
+    "prefecture": "東京都",
+    "city": "東京",
+    "latitude": 35.6762,
+    "longitude": 139.6503,
+    "forecast_area_code": "130010",
+    "airport_icao": "RJTT",
+    "airport_name": "東京国際"
+  },
+  "title": "東京都 東京 の天気",
+  "published_at": "2026/08/29 11:00:00",
+  "official_url": "https://www.jma.go.jp/bosai/forecast/#area_type=offices&area_code=130000",
+  "headline": "",
+  "forecasts": [
+    {
+      "date": "2026-08-29",
+      "dateLabel": "今日",
+      "telop": "雨時々止む",
+      "detail": {
+        "weather": "雨　時々　くもり",
+        "wind": "東の風　後　北の風　２３区西部　では　北の風　やや強く",
+        "wave": "０．５メートル　後　１メートル"
+      },
+      "temperature": {
+        "min": {
+          "celsius": null,
+          "fahrenheit": null
+        },
+        "max": {
+          "celsius": "24",
+          "fahrenheit": "75.2"
+        }
+      },
+      "chanceOfRain": {
+        "T00_06": "--%",
+        "T06_12": "--%",
+        "T12_18": "70%",
+        "T18_24": "50%"
+      },
+      "image": {
+        "title": "雨時々止む",
+        "url": "https://www.jma.go.jp/bosai/forecast/img/302.svg",
+        "width": 80,
+        "height": 60
+      }
+    },
+    {
+      "date": "2026-08-30",
+      "dateLabel": "明日",
+      "telop": "曇り",
+      "detail": {
+        "weather": "くもり",
+        "wind": "北の風　後　南の風",
+        "wave": "０．５メートル"
+      },
+      "temperature": {
+        "min": {
+          "celsius": "21",
+          "fahrenheit": "69.8"
+        },
+        "max": {
+          "celsius": "29",
+          "fahrenheit": "84.2"
+        }
+      },
+      "chanceOfRain": {
+        "T00_06": "10%",
+        "T06_12": "10%",
+        "T12_18": "10%",
+        "T18_24": "10%"
+      },
+      "image": {
+        "title": "曇り",
+        "url": "https://www.jma.go.jp/bosai/forecast/img/200.svg",
+        "width": 80,
+        "height": 60
+      }
+    },
+    {
+      "date": "2026-08-31",
+      "dateLabel": "明後日",
+      "telop": "曇時々晴",
+      "detail": {
+        "weather": "くもり　時々　晴れ",
+        "wind": "東の風　後　南東の風",
+        "wave": "０．５メートル"
+      },
+      "temperature": {
+        "min": {
+          "celsius": "23",
+          "fahrenheit": "73.4"
+        },
+        "max": {
+          "celsius": "32",
+          "fahrenheit": "89.6"
+        }
+      },
+      "chanceOfRain": {
+        "T00_06": "30%",
+        "T06_12": "30%",
+        "T12_18": "30%",
+        "T18_24": "30%"
+      },
+      "image": {
+        "title": "曇時々晴",
+        "url": "https://www.jma.go.jp/bosai/forecast/img/201.svg",
+        "width": 80,
+        "height": 60
+      }
+    }
+  ]
+}
