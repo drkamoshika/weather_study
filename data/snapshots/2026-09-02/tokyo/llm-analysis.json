@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "model": "gemini-flash-latest",
+  "generated_at": "2026-09-02T08:58:30+09:00",
+  "input_sources": [
+    "amedas",
+    "weather-map",
+    "asia-analysis",
+    "asia-forecast24",
+    "asia-forecast48",
+    "upper-850",
+    "upper-500",
+    "numeric",
+    "numeric-week",
+    "numeric-2week",
+    "numeric-month",
+    "forecast",
+    "briefing-short",
+    "briefing-week",
+    "past-observation-text",
+    "aviation:fbjp",
+    "aviation:low_level",
+    "aviation:low_level_detail",
+    "aviation:taf",
+    "aviation:fbjp12",
+    "aviation:sigmet"
+  ],
+  "markdown_path": "llm-analysis.md",
+  "text_only_fallback": true
+}

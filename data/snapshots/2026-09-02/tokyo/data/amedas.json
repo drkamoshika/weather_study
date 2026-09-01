@@ -1,0 +1,215 @@
+{
+  "source_id": "amedas",
+  "collected_at": "2026-09-02T08:57:37+09:00",
+  "location": {
+    "id": "tokyo",
+    "prefecture": "東京都",
+    "city": "東京",
+    "latitude": 35.6762,
+    "longitude": 139.6503,
+    "forecast_area_code": "130010",
+    "airport_icao": "RJTT",
+    "airport_name": "東京国際"
+  },
+  "rows": [
+    {
+      "place": "小河内（オゴウチ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": 23.1,
+      "wind_speed_max_m_s": 1.6,
+      "lat": 35.791666666666664,
+      "lon": 139.05
+    },
+    {
+      "place": "小沢（オザワ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": null,
+      "wind_speed_max_m_s": null,
+      "lat": 35.735,
+      "lon": 139.12333333333333
+    },
+    {
+      "place": "青梅（オウメ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": 23.9,
+      "wind_speed_max_m_s": 1.4,
+      "lat": 35.788333333333334,
+      "lon": 139.31166666666667
+    },
+    {
+      "place": "練馬（ネリマ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": 25.4,
+      "wind_speed_max_m_s": 1.2,
+      "lat": 35.73833333333333,
+      "lon": 139.59166666666667
+    },
+    {
+      "place": "八王子（ハチオウジ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": 24.6,
+      "wind_speed_max_m_s": 2.0,
+      "lat": 35.666666666666664,
+      "lon": 139.31666666666666
+    },
+    {
+      "place": "府中（フチュウ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": 28.1,
+      "wind_speed_max_m_s": 1.3,
+      "lat": 34.56166666666667,
+      "lon": 133.23166666666665
+    },
+    {
+      "place": "世田谷（セタガヤ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": null,
+      "wind_speed_max_m_s": null,
+      "lat": 35.626666666666665,
+      "lon": 139.62
+    },
+    {
+      "place": "東京（トウキョウ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": 26.5,
+      "wind_speed_max_m_s": 2.3,
+      "lat": 35.69166666666667,
+      "lon": 139.75
+    },
+    {
+      "place": "江戸川臨海（エドガワリンカイ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": 27.3,
+      "wind_speed_max_m_s": 2.4,
+      "lat": 35.638333333333335,
+      "lon": 139.86333333333334
+    },
+    {
+      "place": "羽田（ハネダ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": 26.2,
+      "wind_speed_max_m_s": 3.7,
+      "lat": 35.553333333333335,
+      "lon": 139.78
+    },
+    {
+      "place": "大島（オオシマ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": 25.7,
+      "wind_speed_max_m_s": 3.2,
+      "lat": 34.748333333333335,
+      "lon": 139.36166666666668
+    },
+    {
+      "place": "大島北ノ山（オオシマキタノヤマ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": 26.4,
+      "wind_speed_max_m_s": 4.6,
+      "lat": 34.781666666666666,
+      "lon": 139.36
+    },
+    {
+      "place": "利島（トシマ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.5,
+      "temperature_max_c": null,
+      "wind_speed_max_m_s": null,
+      "lat": 34.528333333333336,
+      "lon": 139.28166666666667
+    },
+    {
+      "place": "新島（ニイジマ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": 26.0,
+      "wind_speed_max_m_s": 3.2,
+      "lat": 34.36833333333333,
+      "lon": 139.26833333333335
+    },
+    {
+      "place": "神津島（コウヅシマ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": 27.4,
+      "wind_speed_max_m_s": 3.1,
+      "lat": 34.18833333333333,
+      "lon": 139.13333333333333
+    },
+    {
+      "place": "三宅島（ミヤケジマ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": 26.8,
+      "wind_speed_max_m_s": 3.1,
+      "lat": 34.123333333333335,
+      "lon": 139.52
+    },
+    {
+      "place": "三宅坪田（ミヤケツボタ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": 28.5,
+      "wind_speed_max_m_s": 3.9,
+      "lat": 34.07333333333333,
+      "lon": 139.56
+    },
+    {
+      "place": "八重見ヶ原（ヤエミガハラ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": 28.8,
+      "wind_speed_max_m_s": 4.2,
+      "lat": 33.115,
+      "lon": 139.785
+    },
+    {
+      "place": "八丈島（ハチジョウジマ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": 28.5,
+      "wind_speed_max_m_s": 5.1,
+      "lat": 33.12166666666667,
+      "lon": 139.77833333333334
+    },
+    {
+      "place": "青ヶ島（アオガシマ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": null,
+      "wind_speed_max_m_s": null,
+      "lat": 32.46666666666667,
+      "lon": 139.76
+    },
+    {
+      "place": "父島（チチジマ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": 29.5,
+      "wind_speed_max_m_s": 2.8,
+      "lat": 27.091666666666665,
+      "lon": 142.19
+    },
+    {
+      "place": "母島（ハハジマ）",
+      "observed": "2026-09-02 08:30",
+      "rain_1h": 0.0,
+      "temperature_max_c": null,
+      "wind_speed_max_m_s": null,
+      "lat": 26.635,
+      "lon": 142.16166666666666
+    }
+  ],
+  "measurement_note": "日最高気温と最大風速です。平均値ではありません。"
+}
