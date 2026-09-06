@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-06T08:44:40+09:00",
+  "generated_at": "2026-09-06T12:45:49+09:00",
   "snapshots": [
     {
       "date": "2026-09-06",
@@ -43,6 +43,48 @@
       "llm_analysis": true,
       "llm_model": "gemini-flash-latest",
       "manifest": "snapshots/2026-09-06/tokyo/manifest.json"
+    },
+    {
+      "date": "2026-09-06",
+      "location": {
+        "id": "hokkaido",
+        "prefecture": "北海道",
+        "city": "札幌",
+        "latitude": 43.0618,
+        "longitude": 141.3545,
+        "forecast_area_code": "016010",
+        "airport_icao": "RJCC",
+        "airport_name": "新千歳"
+      },
+      "collection_mode": "manual",
+      "generated_at": "2026-09-06T12:45:49+09:00",
+      "sources": [
+        "amedas",
+        "weather-map",
+        "asia-analysis",
+        "asia-forecast24",
+        "asia-forecast48",
+        "upper-850",
+        "upper-500",
+        "numeric",
+        "numeric-week",
+        "numeric-2week",
+        "numeric-month",
+        "forecast",
+        "briefing-short",
+        "briefing-week",
+        "past-observation-text",
+        "aviation:fbjp",
+        "aviation:low_level",
+        "aviation:low_level_detail",
+        "aviation:taf",
+        "aviation:fbjp12",
+        "aviation:sigmet"
+      ],
+      "source_count": 21,
+      "llm_analysis": true,
+      "llm_model": "gemini-flash-latest",
+      "manifest": "snapshots/2026-09-06/hokkaido/manifest.json"
     },
     {
       "date": "2026-09-05",
